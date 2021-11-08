@@ -1,0 +1,3 @@
+export const aboutInfo = {
+    info: 'Tristan is a web-developer, musician, and teacher living in Round Rock, Texas. His pedigree includes multiple college degrees earned by sitting in a practice room for hours on end learning to hit drums good and also a certificate from Practicum in Full-Stack Web Development.  His hobbies include reading, watching sci-fi, writing about stories, and chasing his kids around the house.'
+}
