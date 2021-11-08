@@ -16,11 +16,16 @@ const Navigation = (props) => {
 
     return (
         <NavWrapper>
-            <NavLink>Home</NavLink>
+            <NavLink
+                color={props.color}>
+                Home
+            </NavLink>
             {props.loggedIn ? <NavLink>Saved Articles</NavLink> : ''}
-            <NavLink onClick={openPopup}>
+            <NavLink
+                onClick={openPopup}
+                color={props.color}>
                 {linkText()}
-                </NavLink>
+            </NavLink>
         </NavWrapper>
     )
 }

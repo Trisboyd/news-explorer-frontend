@@ -10,7 +10,10 @@ const Main = (props) => {
 
     return (
         <MainLayout>
-            <Header loggedIn={props.loggedIn} openPopup={openPopup}/>
+            <Header 
+            loggedIn={props.loggedIn} 
+            openPopup={openPopup}
+            color={props.color} />
             <MainTitle>What's going on in the world?</MainTitle>
             <MainSubtitle>Find the latest news on any topic and save them in your personal account.</MainSubtitle>
             <MainInputWrapper>

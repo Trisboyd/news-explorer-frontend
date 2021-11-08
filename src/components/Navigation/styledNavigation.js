@@ -16,15 +16,15 @@ align-items: center;
 text-align: center;
 margin-right: 42px;
 height: 80px;
-color: ${props => props.savedPage ? '#1A1B22' : '#FFFFFF'};
+color: ${props => props.color};
 
 :hover {
-border-bottom: 3px solid #FFF;
+border-bottom: 3px solid ${props => props.color};
 cursor: pointer;
 }
 
 :last-of-type {
-border: 1px solid #FFFFFF;
+border: 1px solid ${props => props.color};
 box-sizing: border-box;
 border-radius: 100px;
 width: 176px;

@@ -14,10 +14,11 @@ const Header = (props) => {
 
     return (
         <HeaderBar>
-            <HeaderTitle>NewsExplorer</HeaderTitle>
+            <HeaderTitle color={props.color}>NewsExplorer</HeaderTitle>
             <Navigation
                 loggedIn={props.loggedIn}
-                openPopup={openPopup} />
+                openPopup={openPopup}
+                color={props.color} />
         </HeaderBar>
     )
 }

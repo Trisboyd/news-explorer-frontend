@@ -13,5 +13,5 @@ export const HeaderTitle = styled.p`
     line-height: 1.2;
     display: flex;
     align-items: center;
-    color: #FFFFFF;
+    color: ${props => props.color};
 `

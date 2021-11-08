@@ -1,4 +1,8 @@
+// ___________________________________________________________Dependencies
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
+// _______________________________________________________________Components
 import Main from './components/Main/Main';
 import SavedNewsHeader from './components/SavedNewsHeader/SavedNewsHeader';
 import About from '../src/components/About/About';
@@ -6,10 +10,15 @@ import NewsCardList from './components/NewsCardList/NewsCardList';
 import Footer from './components/Footer/Footer';
 import PopupWithForm from './components/PopupWithForm/PopupWithForm';
 import PopupMessage from './components/PopupMessage/PopupMessage';
+
+// _______________________________________________constants
 import articles from './utilities/articles';
+
+
 
 function App() {
 
+  // _______________________________________________________________state variables
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const [isPopupFormOpen, setIsPopupFormOpen] = React.useState(false);
@@ -18,6 +27,7 @@ function App() {
 
   const [resultsNumber, setResultsNumber] = React.useState(3);
 
+  // _______________________________________shifts # results shown from article search
   const showAllResults = () => {
     setResultsNumber();
   }
@@ -26,6 +36,7 @@ function App() {
     setResultsNumber(3);
   }
 
+  // _______________________________________________________popup functions
   const openPopupForm = () => {
     setIsPopupFormOpen(true);
   }
@@ -37,11 +48,23 @@ function App() {
 
   return (
     <>
-      <Main
-        loggedIn={loggedIn}
-        openPopup={openPopupForm} />
-        <SavedNewsHeader />
+      <Switch>
+        <Route exact path='/'>
+          <Main
+            loggedIn={loggedIn}
+            openPopup={openPopupForm}
+            color={'#FFF'} //___color of header based on route
+          />
+        </ Route>
+        <Route path='/saved-news'>
+          <SavedNewsHeader
+            color={'#1A1B22'} //___color of header based on route
+          />
+        </ Route>
+      </Switch>
       <NewsCardList
+        //search={search} this will be a state variable for determining whether or not to show results
+        //based on whether a search has been initiated
         loggedIn={loggedIn}
         articles={articles}
         resultsNumber={resultsNumber}
@@ -51,8 +74,7 @@ function App() {
       <Footer />
       <PopupWithForm
         isOpen={isPopupFormOpen}
-        closePopup={closeAllPopups}
-      />
+        closePopup={closeAllPopups} />
       <PopupMessage
         isOpen={isPopupMessageOpen}
         closePopup={closeAllPopups} />
