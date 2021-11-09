@@ -2,18 +2,19 @@ import React from 'react';
 import { MainButton } from '../Main/styledMain';
 import {
     Overlay, PopupExit, PopupForm, PopupContainer,
-    FormTitle, FormInput, FormLabel, FormSwitch, FormSwitchSpan
+    FormTitle, FormInput, FormLabel, FormSwitch, FormSwitchSpan, FormErrorMessage
 } from './styledPopupWithForm';
 
 const PopupWithForm = (props) => {
 
+    //form state for determining which form should be shown (sign in or sign up)
     const [formState, setFormState] = React.useState(0);
-    
+
     const formTitle = ['Sign in', 'Sign up'];
 
     const swapFormTitle = () => {
         if (formState === 0) {
-        setFormState(1)
+            setFormState(1)
         }
         else setFormState(0);
     }
@@ -36,6 +37,7 @@ const PopupWithForm = (props) => {
                         name='email'
                         placeholder='Enter email'
                         required></FormInput>
+                    <FormErrorMessage></FormErrorMessage>
                     <FormLabel>Password</FormLabel>
                     <FormInput
                         id='password'
@@ -43,15 +45,17 @@ const PopupWithForm = (props) => {
                         placeholder='Enter password'
                         required>
                     </FormInput>
+                    <FormErrorMessage></FormErrorMessage>
                     {formState === 1 ?
                         <>
-                        <FormLabel>Username</FormLabel>
-                        <FormInput
-                            id='username'
-                            name='usernam'
-                            placeholder='Enter your username'
-                            required>
-                        </FormInput>
+                            <FormLabel>Username</FormLabel>
+                            <FormInput
+                                id='username'
+                                name='usernam'
+                                placeholder='Enter your username'
+                                required>
+                                <FormErrorMessage></FormErrorMessage>
+                            </FormInput>
                         </> : ''}
                     <MainButton
                         color={'#2F71E5'}

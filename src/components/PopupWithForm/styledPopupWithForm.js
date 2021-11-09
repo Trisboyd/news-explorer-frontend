@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import exit from '../../images/close-icon.svg';
-import { Link } from 'react-router-dom';
 
 export const Overlay = styled.section`
     display: flex;
@@ -96,4 +95,9 @@ export const FormSwitchSpan = styled.a`
     color: #2F71E5;
     cursor: pointer;
     margin-left: 8px;
+`
+export const FormErrorMessage = styled.span`
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
 `

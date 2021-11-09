@@ -10,11 +10,11 @@ import NewsCardList from './components/NewsCardList/NewsCardList';
 import Footer from './components/Footer/Footer';
 import PopupWithForm from './components/PopupWithForm/PopupWithForm';
 import PopupMessage from './components/PopupMessage/PopupMessage';
+// import Preloader from './components/Preloader/Preloader';
+// import NoResults from './components/NoResults/NoResults';
 
 // _______________________________________________constants
 import articles from './utilities/articles';
-
-
 
 function App() {
 
@@ -62,6 +62,8 @@ function App() {
           />
         </ Route>
       </Switch>
+      {/* <Preloader /> */}
+      {/* <NoResults /> */}
       <NewsCardList
         //search={search} this will be a state variable for determining whether or not to show results
         //based on whether a search has been initiated
