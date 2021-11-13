@@ -8,8 +8,12 @@ import { HeaderBar, HeaderTitle } from './styledHeader';
 //_______________________________________________Header component
 const Header = (props) => {
 
-    const openPopup = () => {
-        props.openPopup();
+    const openPopupForm = () => {
+        props.openPopupForm();
+    }
+
+    const openPopupMenu = () => {
+        props.openPopupMenu();
     }
 
     return (
@@ -17,8 +21,10 @@ const Header = (props) => {
             <HeaderTitle color={props.color}>NewsExplorer</HeaderTitle>
             <Navigation
                 loggedIn={props.loggedIn}
-                openPopup={openPopup}
-                color={props.color} />
+                openPopupForm={openPopupForm}
+                color={props.color}
+                openPopupMenu={openPopupMenu}
+                isPopupMenuOpen={props.isPopupMenuOpen} />
         </HeaderBar>
     )
 }

@@ -26,7 +26,14 @@ const PopupWithForm = (props) => {
     return (
         <Overlay isOpen={props.isOpen}>
             <PopupContainer>
-                <PopupExit onClick={props.closePopup} />
+                <PopupExit 
+                onClick={props.closePopup}
+                height={'40px'}
+                width={'40px'}
+                top={'-45px'}
+                right={'-45px'}
+                smallRight={'16px'}
+                smallSize={'24px'} />
                 <PopupForm>
                     <FormTitle>
                         {formTitle[formState]}

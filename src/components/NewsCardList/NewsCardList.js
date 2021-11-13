@@ -1,6 +1,6 @@
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
-import { NewsListWrapper, NewsList, NewsListTitle } from './styledNewsCardList';
+import { NewsListWrapper, NewsList, NewsListTitle, NewsListButton } from './styledNewsCardList';
 import { MainButton } from '../Main/styledMain';
 
 const NewsCardList = (props) => {
@@ -44,13 +44,13 @@ const NewsCardList = (props) => {
                             source={article.source} />)
                 })}
             </NewsList>
-            <MainButton
+            <NewsListButton
                 width={'288px'}
                 color={'#E8E8E8'}
                 textColor={'#000'}
                 onClick={resultsClickHandler}>
                 {message}
-            </MainButton>
+            </NewsListButton>
         </ NewsListWrapper>
     )
 }

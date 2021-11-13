@@ -10,6 +10,7 @@ import NewsCardList from './components/NewsCardList/NewsCardList';
 import Footer from './components/Footer/Footer';
 import PopupWithForm from './components/PopupWithForm/PopupWithForm';
 import PopupMessage from './components/PopupMessage/PopupMessage';
+import PopupMenu from './components/PopupMenu/PopupMenu';
 // import Preloader from './components/Preloader/Preloader';
 // import NoResults from './components/NoResults/NoResults';
 
@@ -24,6 +25,8 @@ function App() {
   const [isPopupFormOpen, setIsPopupFormOpen] = React.useState(false);
 
   const [isPopupMessageOpen, setIsPopupMessageOpen] = React.useState(false);
+
+  const [isPopupMenuOpen, setIsPopupMenuOpen] = React.useState(false);
 
   const [resultsNumber, setResultsNumber] = React.useState(3);
 
@@ -41,9 +44,14 @@ function App() {
     setIsPopupFormOpen(true);
   }
 
+  const openPopupMenu = () => {
+    setIsPopupMenuOpen(true);
+  }
+
   const closeAllPopups = () => {
     setIsPopupFormOpen(false);
     setIsPopupMessageOpen(false);
+    setIsPopupMenuOpen(false);
   }
 
   return (
@@ -52,9 +60,20 @@ function App() {
         <Route exact path='/'>
           <Main
             loggedIn={loggedIn}
-            openPopup={openPopupForm}
+            openPopupForm={openPopupForm}
+            openPopupMenu={openPopupMenu}
+            isPopupMenuOpen={isPopupMenuOpen}
             color={'#FFF'} //___color of header based on route
           />
+          <NewsCardList
+            //search={search} this will be a state variable for determining whether or not to show results
+            //based on whether a search has been initiated
+            loggedIn={loggedIn}
+            articles={articles}
+            resultsNumber={resultsNumber}
+            showAllResults={showAllResults}
+            resetResults={resetResults} />
+          <About />
         </ Route>
         <Route path='/saved-news'>
           <SavedNewsHeader
@@ -64,15 +83,6 @@ function App() {
       </Switch>
       {/* <Preloader /> */}
       {/* <NoResults /> */}
-      <NewsCardList
-        //search={search} this will be a state variable for determining whether or not to show results
-        //based on whether a search has been initiated
-        loggedIn={loggedIn}
-        articles={articles}
-        resultsNumber={resultsNumber}
-        showAllResults={showAllResults}
-        resetResults={resetResults} />
-      <About />
       <Footer />
       <PopupWithForm
         isOpen={isPopupFormOpen}
@@ -80,6 +90,10 @@ function App() {
       <PopupMessage
         isOpen={isPopupMessageOpen}
         closePopup={closeAllPopups} />
+      <PopupMenu
+        popupMenuOpen={isPopupMenuOpen}
+        closePopupMenu={closeAllPopups}
+        openPopupForm={openPopupForm} />
     </>
   );
 }

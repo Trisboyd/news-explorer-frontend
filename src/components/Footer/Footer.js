@@ -7,8 +7,8 @@ const Footer = () => {
 
     return (
         <FooterBlock>
-            <Copyright>© 2021 Supersite, Powered by News API</Copyright>
-            <Links>
+            <Copyright id='a'>© 2021 Supersite, Powered by News API</Copyright>
+            <Links id='b'>
                 <TextLinks>
                     <TextLink href='#'>Home</TextLink>
                     <TextLink href='www.practicum.yandex.com'>Practicum by Yandex</TextLink>

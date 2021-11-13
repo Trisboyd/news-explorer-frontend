@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import exit from '../../images/close-icon.svg';
+import { devices } from '../../utilities/constants';
 
 export const Overlay = styled.section`
     display: flex;
@@ -22,13 +23,17 @@ export const PopupContainer = styled.div`
     display: flex;
     justify-content: center;
     z-index: 2;
+
+    @media ${devices.mobileL} {
+        max-width: 100vw;
+    }
     `
 export const PopupExit = styled.button`
-    height: 40px;
-    width: 40px;
+    height: ${props => props.height};
+    width: ${props => props.width};
     position: absolute;
-    top: -45px;
-    right: -45px;
+    top: ${props => props.top};
+    right: ${props => props.right};
     cursor: pointer;
     background-image: url(${exit});
     background-color: rgba(0, 0, 0, 0);
@@ -36,6 +41,12 @@ export const PopupExit = styled.button`
     background-repeat: no-repeat;
     border: none;
     transition: opacity .5s ease-in-out .5s;
+
+    @media ${devices.mobileL} {
+        right: ${props => props.smallRight};
+        height: ${props => props.smallSize};
+        width: ${props => props.smallSize};
+    }
     `
 export const PopupForm = styled.form`
     width: 100%;

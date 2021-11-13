@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavWrapper, NavLink } from './styledNavigation';
+import { NavWrapper, NavLink, NavMenu, NavMenuBar } from './styledNavigation';
 
 const Navigation = (props) => {
 
@@ -10,19 +10,29 @@ const Navigation = (props) => {
         return 'Sign in'
     }
 
-    const openPopup = () => {
-        props.openPopup();
+    const openPopupForm = () => {
+        props.openPopupForm();
+    }
+
+    const openPopupMenu = () => {
+        props.openPopupMenu();
     }
 
     return (
         <NavWrapper>
+            <NavMenu 
+            onClick={openPopupMenu}
+            isOpen={props.isPopupMenuOpen}>
+                <NavMenuBar />
+                <NavMenuBar />
+            </NavMenu>
             <NavLink
                 color={props.color}>
                 Home
             </NavLink>
             {props.loggedIn ? <NavLink>Saved Articles</NavLink> : ''}
             <NavLink
-                onClick={openPopup}
+                onClick={openPopupForm}
                 color={props.color}>
                 {linkText()}
             </NavLink>

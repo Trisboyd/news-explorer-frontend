@@ -54,6 +54,7 @@ export const NewsMark = styled.img`
 `
 export const NewsTextWrap = styled.div`
     width: 88%;
+    height: 304px;
     display: flex;
     flex-direction: column;
     margin-left: 22px;
@@ -64,16 +65,25 @@ export const NewsDate = styled.p`
     display: flex;
     align-items: center;
     color: #B6BCBF;
+    margin: 20px 0 0 0;
 `
 export const NewsHeadline = styled.h3`
     font-size: 26px;
     line-height: 1.15;
     color: #1A1B22;
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 12px 0 0 0;
 `
 export const NewsText = styled.p`
     font-size: 16px;
     line-height: 1.37;
     color: #1A1B22;
+    margin: 16px 0 0 0;
+    height: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `
 export const NewsSource = styled.p`
     font-size: 16px;
@@ -81,4 +91,6 @@ export const NewsSource = styled.p`
     letter-spaceing: .4px;
     text-transform: uppercase;
     color: #B6BCBF;
+    justify-self: flex-end;
+    margin-bottom: 24px;
 `
