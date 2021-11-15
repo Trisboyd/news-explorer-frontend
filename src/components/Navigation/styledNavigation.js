@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { devices } from '../../utilities/constants';
-import menu from '../../images/nav-menu.png';
 
 export const NavWrapper = styled.div`
 display: flex;
@@ -20,7 +19,7 @@ top: 30%;
 `
 
 export const NavMenuBar = styled.div`
-background-image: url(${menu});
+background-image: ${props => props.color};
 visibility: hidden;
 width: 16px;
 height: 2px;

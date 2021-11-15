@@ -4,10 +4,23 @@ import { SavedHeader, SavedHeaderWrapper, SavedKeywords, SavedKeywordsSpan, Save
 
 const SavedNewsHeader = (props) => {
 
+    const openPopupForm = () => {
+        props.openPopupForm();
+    }
+
+    const openPopupMenu = () => {
+        props.openPopupMenu();
+    }
+
     return (
         <SavedHeaderWrapper>
-            <Header 
-            color={props.color} />
+            <Header
+                loggedIn={props.loggedIn}
+                openPopupForm={openPopupForm}
+                openPopupMenu={openPopupMenu}
+                isPopupMenuOpen={props.isPopupMenuOpen}
+                color={props.color}
+            />
             <SavedHeader>Saved Articles</SavedHeader>
             <SavedMessage>{props.name} you have {props.number} saved <br /> articles</SavedMessage>
             <SavedKeywords>By keywords:

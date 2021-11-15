@@ -58,7 +58,7 @@ function App() {
 
   return (
     <>
-    <GlobalStyle />
+      <GlobalStyle />
       <Switch>
         <Route exact path='/'>
           <Main
@@ -81,8 +81,12 @@ function App() {
         <Route path='/saved-news'>
           <SavedNewsHeader
             color={'#1A1B22'} //___color of header based on route
+            loggedIn={loggedIn}
+            openPopupForm={openPopupForm}
+            openPopupMenu={openPopupMenu}
+            isPopupMenuOpen={isPopupMenuOpen}
           />
-          <SavedNews 
+          <SavedNews
             articles={articles} />
         </ Route>
       </Switch>
