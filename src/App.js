@@ -1,6 +1,7 @@
 // ___________________________________________________________Dependencies
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { Normalize } from 'styled-normalize';
 
 // _______________________________________________________________Components
 import Main from './components/Main/Main';
@@ -59,6 +60,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <Normalize />
       <Switch>
         <Route exact path='/'>
           <Main
