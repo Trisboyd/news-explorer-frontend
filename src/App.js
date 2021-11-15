@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 // _______________________________________________________________Components
 import Main from './components/Main/Main';
 import SavedNewsHeader from './components/SavedNewsHeader/SavedNewsHeader';
+import SavedNews from './components/SavedNews/SavedNews';
 import About from '../src/components/About/About';
 import NewsCardList from './components/NewsCardList/NewsCardList';
 import Footer from './components/Footer/Footer';
@@ -81,6 +82,8 @@ function App() {
           <SavedNewsHeader
             color={'#1A1B22'} //___color of header based on route
           />
+          <SavedNews 
+            articles={articles} />
         </ Route>
       </Switch>
       {/* <Preloader /> */}

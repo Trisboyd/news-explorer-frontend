@@ -26,20 +26,21 @@ const PopupWithForm = (props) => {
     return (
         <Overlay isOpen={props.isOpen}>
             <PopupContainer>
-                <PopupExit 
-                onClick={props.closePopup}
-                height={'40px'}
-                width={'40px'}
-                top={'-45px'}
-                right={'-45px'}
-                smallRight={'16px'}
-                smallSize={'24px'} />
+                <PopupExit
+                    onClick={props.closePopup}
+                    height={'40px'}
+                    width={'40px'}
+                    top={'-45px'}
+                    right={'-45px'}
+                    smallRight={'16px'}
+                    smallSize={'24px'} />
                 <PopupForm>
                     <FormTitle>
                         {formTitle[formState]}
                     </FormTitle>
                     <FormLabel>Email</FormLabel>
                     <FormInput
+                        type='text'
                         id='email'
                         name='email'
                         placeholder='Enter email'
@@ -47,6 +48,7 @@ const PopupWithForm = (props) => {
                     <FormErrorMessage></FormErrorMessage>
                     <FormLabel>Password</FormLabel>
                     <FormInput
+                        type='text'
                         id='password'
                         name='password'
                         placeholder='Enter password'
@@ -57,12 +59,13 @@ const PopupWithForm = (props) => {
                         <>
                             <FormLabel>Username</FormLabel>
                             <FormInput
+                                type='text'
                                 id='username'
                                 name='usernam'
                                 placeholder='Enter your username'
                                 required>
-                                <FormErrorMessage></FormErrorMessage>
                             </FormInput>
+                            <FormErrorMessage></FormErrorMessage>
                         </> : ''}
                     <MainButton
                         color={'#2F71E5'}
