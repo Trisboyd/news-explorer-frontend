@@ -66,6 +66,7 @@ export const NewsDate = styled.p`
     align-items: center;
     color: #B6BCBF;
     margin: 20px 0 0 0;
+    font-family: SourceSansPro;
 `
 export const NewsHeadline = styled.h3`
     font-size: 26px;
@@ -93,4 +94,5 @@ export const NewsSource = styled.p`
     color: #B6BCBF;
     justify-self: flex-end;
     margin-bottom: 24px;
+    font-family: RobotoSlab;
 `

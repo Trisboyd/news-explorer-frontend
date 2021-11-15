@@ -32,10 +32,6 @@ display: flex;
 flex-direction: row;
 margin-right: 6vw;
 
-@media ${devices.laptop} {
-    margin-top: 20px;
-}
-
 @media ${devices.mobileL} {
     margin: 20px auto 0 auto;
     width: 100vw;

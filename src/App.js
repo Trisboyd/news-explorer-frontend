@@ -16,6 +16,7 @@ import PopupMenu from './components/PopupMenu/PopupMenu';
 
 // _______________________________________________constants
 import articles from './utilities/articles';
+import { GlobalStyle } from './components/Global/GlobalStyle';
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
 
   return (
     <>
+    <GlobalStyle />
       <Switch>
         <Route exact path='/'>
           <Main

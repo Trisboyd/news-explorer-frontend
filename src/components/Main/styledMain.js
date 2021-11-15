@@ -35,6 +35,7 @@ font-size: 60px;
 line-height: 1.07;
 color: #FFFFFF;
 margin: auto;
+font-family: RobotoRegular;
 
 @media ${devices.laptop} {
     width: 50vw;

@@ -1,4 +1,3 @@
-import { PromiseProvider } from 'mongoose';
 import React from 'react';
 import { Overlay, PopupContainer, PopupExit, PopupForm } from '../PopupWithForm/styledPopupWithForm';
 import { PopupMessageTitle, PopupSigninLink } from './styledPopupMessage';
