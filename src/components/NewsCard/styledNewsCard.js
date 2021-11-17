@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { devices } from '../../utilities/constants';
 
 export const NewsWrap = styled.article`
     display: flex;
@@ -6,9 +7,14 @@ export const NewsWrap = styled.article`
     max-width: 400px;
     background: #FFF;
     border-radius: 5%;
+    margin: auto;
 
     :last-of-type {
         margin-bottom: 64px;
+    }
+
+    @media ${devices.mobileL} {
+    max-width: 85.6vw;
     }
 `
 export const NewsImageContainer = styled.div`
@@ -28,15 +34,14 @@ export const NewsImageLabel = styled.div`
     display: flex;
     align-items: center;
     padding: 8px 22px;
-    visibility: ${props => props.visible};
+    visibility: ${props => props.savedNews ? 'visible' : 'hidden'}};
 `
 
 export const NewsImage = styled.img`
     width: 100%;
-    height: 272px;
     border-radius: 5% 5% 0 0;
 `
-export const NewsMarkWrap = styled.div`
+export const NewsMarkWrap = styled.button`
     width: 40px;
     height: 40px;
     position: absolute;
@@ -46,11 +51,20 @@ export const NewsMarkWrap = styled.div`
     border-radius: 8px;
     display: flex;
     align-items: center;
+    outline: none;
+    border: none;
 `
 export const NewsMark = styled.img`
-    width: 14px;
-    height: 19px;
+    max-width: 24px;
+    max-height: 24px;
     margin: auto;
+    opacity: .3;
+    cursor: pointer;
+    transition: opacity .3s ease-in-out .3s;
+
+    :hover {
+        opacity: 1;
+    }
 `
 export const NewsTextWrap = styled.div`
     width: 88%;
@@ -60,6 +74,8 @@ export const NewsTextWrap = styled.div`
     margin-left: 22px;
 `
 export const NewsDate = styled.p`
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     font-size: 18px;
     line-height: 1.33;
     display: flex;
@@ -69,6 +85,8 @@ export const NewsDate = styled.p`
     font-family: SourceSansPro;
 `
 export const NewsHeadline = styled.h3`
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: 400;
     font-size: 26px;
     line-height: 1.15;
     color: #1A1B22;
@@ -78,6 +96,8 @@ export const NewsHeadline = styled.h3`
     margin: 12px 0 0 0;
 `
 export const NewsText = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     font-size: 16px;
     line-height: 1.37;
     color: #1A1B22;
@@ -87,6 +107,8 @@ export const NewsText = styled.p`
     text-overflow: ellipsis;
 `
 export const NewsSource = styled.p`
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: 700;
     font-size: 16px;
     line-height: 1.25;
     letter-spaceing: .4px;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { devices } from '../../utilities/constants';
 
-export const HeaderBar = styled.section`
+export const HeaderBar = styled.header`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -19,6 +19,8 @@ export const HeaderBar = styled.section`
     }
 `
 export const HeaderTitle = styled.p`
+    font-family: 'Roboto-Slab', sans-serif;
+    font-weight: 700;
     font-size: 20px;
     line-height: 1.2;
     display: flex;

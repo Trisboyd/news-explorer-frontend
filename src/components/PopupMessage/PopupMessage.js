@@ -1,17 +1,32 @@
 import React from 'react';
 import { Overlay, PopupContainer, PopupExit, PopupForm } from '../PopupWithForm/styledPopupWithForm';
-import { PopupMessageTitle, PopupSigninLink } from './styledPopupMessage';
+import { PopupMessageContainer, PopupMessageTitle, PopupSigninLink } from './styledPopupMessage';
 
 const PopupMessage = (props) => {
+
+    const openSignup = () => {
+        props.closePopup();
+        props.openPopupForm();
+    }
 
     return (
         <Overlay isOpen={props.isOpen}>
             <PopupContainer>
-                <PopupForm>
-                    <PopupExit onClick={props.closePopup} />
-                    <PopupMessageTitle>Registration successfully completed!</PopupMessageTitle>
-                    <PopupSigninLink>Sign in</PopupSigninLink>
-                </PopupForm>
+                <PopupMessageContainer>
+                    <PopupExit
+                        onClick={props.closePopup}
+                        height={'40px'}
+                        width={'40px'}
+                        top={'27%'}
+                        right={'18%'}
+                        smallRight={'5%'}
+                        smallSize={'24px'} />
+                    <PopupMessageTitle>Registration successfully <br /> completed!</PopupMessageTitle>
+                    <PopupSigninLink
+                        onClick={openSignup}>
+                        Sign in
+                    </PopupSigninLink>
+                </PopupMessageContainer>
             </PopupContainer>
         </Overlay>
     )

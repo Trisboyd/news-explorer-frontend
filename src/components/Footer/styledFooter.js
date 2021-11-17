@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { devices } from '../../utilities/constants';
 
-export const FooterBlock = styled.section`
+export const FooterBlock = styled.footer`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-width: 100vw;
 height: 22px;
 padding: 33px 0;
 
@@ -18,6 +17,8 @@ min-height: 176px;
 }
 `
 export const Copyright = styled.p`
+font-family: 'Roboto', sans-serif;
+font-weight: 400;
 font-size: 16px;
 line-height: 1.37;
 color: #B6BCBF;
@@ -27,7 +28,7 @@ margin: 0 0 0 7vw;
 margin: 40px auto 22px auto;
 }
 `
-export const Links = styled.div`
+export const Links = styled.nav`
 display: flex;
 flex-direction: row;
 margin-right: 6vw;
@@ -56,6 +57,8 @@ min-width: 290px;
 }
 `
 export const TextLink = styled.a`
+font-family: 'Roboto', sans-serif;
+font-weight: 400;
 font-size: 18px;
 line-height: 1.33;
 color: #1A1B22;

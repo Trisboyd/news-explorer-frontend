@@ -15,8 +15,9 @@ import { devices } from '../../utilities/constants';
     `
     export const AboutImage = styled.img`
     width: 31vw;
+    max-width: 464px;
     max-height: 464px;
-    border-radius: 200px;
+    border-radius: 50%;
 
     @media ${devices.mobileL} {
     width: 90vw;
@@ -27,6 +28,7 @@ import { devices } from '../../utilities/constants';
     flex-direction: column;
     width: 42vw;
     margin-left: 3.8vw;
+    align-self: flex-start;
 
     @media ${devices.laptop} {
         width: 55vw;
@@ -37,12 +39,16 @@ import { devices } from '../../utilities/constants';
     }
     `
     export const AboutTitle = styled.h2`
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: 400;
     font-size: 40px;
     line-height: 1.15;
     color: #1A1B22;
     margin-bottom: 24px;
     `
     export const AboutText = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     font-size: 18px;
     line-height: 1.33;
     color: #1A1B22;
