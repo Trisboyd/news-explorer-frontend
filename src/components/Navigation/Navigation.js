@@ -4,28 +4,27 @@ import { useLocation } from 'react-router-dom';
 import menu from '../../images/nav-menu.png';
 import menuBlack from '../../images/nav-menu-black.png';
 import logoutWhite from '../../images/logoutWhite.png';
-import logoutBlack from '../../images/logoutBlack.png';
+import logoutBlack from '../../images/logout-black.png';
 
 const Navigation = (props) => {
 
     const [menuImage, setMenuImage] = React.useState(`url(${menu})`);
-    const [logoutImage, setLogoutImage] = React.useState(`url(${logoutWhite})`)
-
 
     const location = useLocation();
+
+    const whiteLogout = `url(${logoutWhite})`;
+
+    const blackLogout = `url(${logoutBlack})`;
 
     const setMenuItems = () => {
         if (location.pathname === '/saved-news') {
             setMenuImage(`url(${menuBlack})`)
-            setLogoutImage(`url(${logoutBlack})`)
         }
         else setMenuImage(`url(${menu})`)
-             setLogoutImage(`url(${logoutWhite})`);
     }
 
     React.useEffect(() => {
         setMenuItems();
-        console.log(logoutImage);
     }, [location.pathname]);
 
 
@@ -67,7 +66,10 @@ const Navigation = (props) => {
                 color={props.color}
                 to='#'>
                 {linkText()}
-                {props.loggedIn ? <NavLogout image={logoutImage} /> : ''}
+                {props.loggedIn &&
+                    <NavLogout
+                        image={location.pathname === '/saved-news' ? blackLogout : whiteLogout}
+                    />}
             </NavLink>
         </NavWrapper>
     )

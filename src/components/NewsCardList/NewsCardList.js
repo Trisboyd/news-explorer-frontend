@@ -1,7 +1,6 @@
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import { NewsListWrapper, NewsList, NewsListTitle, NewsListButton } from './styledNewsCardList';
-import { MainButton } from '../Main/styledMain';
 
 const NewsCardList = (props) => {
 

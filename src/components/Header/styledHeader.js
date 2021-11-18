@@ -8,6 +8,7 @@ export const HeaderBar = styled.header`
     padding: 0 7.2vw;
     height: 80px;
     border-bottom: solid 1px #C4C4C4;
+    box-sizing: border-box;
     z-index: ${props => props.menuPopupOpen ? '2' : '0'};
 
     @media ${devices.tablet} {
@@ -16,6 +17,7 @@ export const HeaderBar = styled.header`
 
     @media ${devices.mobileL} {
         max-height: 17.5vw;
+        padding: 0;
     }
 `
 export const HeaderTitle = styled.p`
@@ -27,4 +29,8 @@ export const HeaderTitle = styled.p`
     align-items: center;
     color: ${props => props.color};
     position: relative;
+
+    @media ${devices.mobileL} {
+    margin-left: 16px;
+    }
 `

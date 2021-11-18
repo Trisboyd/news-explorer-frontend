@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     NewsWrap, NewsMark, NewsDate, NewsHeadline,
-    NewsImage, NewsImageLabel, NewsMarkWrap, NewsTextWrap, NewsSource, NewsText, NewsImageContainer
+    NewsImage, NewsImageLabel, NewsMarkWrap, NewsTextWrap, NewsSource, NewsText, NewsImageContainer, NewsMarkMessageWrap, NewsMarkMessage
 } from './styledNewsCard';
 import mark from '../../images/bookmark.svg';
 import markBlue from '../../images/bookmarkBlue.png';
@@ -11,22 +11,18 @@ const NewsCard = (props) => {
 
     const [bookmark, setBookmark] = React.useState(mark);
 
-    const [favorited, setFavorited] = React.useState(false);
+    const [isSaved, setIsSaved] = React.useState(false);
 
-    const articleImage = () => {
-        if (props.savedNews) {
-            return trash;
-        }
-        else return bookmark;
-    }
+    const [isShown, setIsShown] = React.useState(false);
 
     const clickMarkHandler = () => {
         if (bookmark === mark) {
             setBookmark(markBlue)
-            setFavorited(true);
+            setIsSaved(true);
         }
-        else setBookmark(mark)
-             setFavorited(false);
+        else {setBookmark(mark)
+        setIsSaved(false)};
+        console.log(isSaved);
     }
 
     return (
@@ -35,12 +31,19 @@ const NewsCard = (props) => {
                 <NewsImageContainer>
                     <NewsImageLabel savedNews={props.savedNews}>{props.label}</NewsImageLabel>
                     <NewsImage src={props.image} />
-                    <NewsMarkWrap>
-                        <NewsMark 
-                        src={articleImage()}
-                        onClick={clickMarkHandler}
-                        clicked={favorited} />
-                    </NewsMarkWrap>
+                    <NewsMarkMessageWrap>
+                        <NewsMarkMessage
+                        isShown={isShown}>Sign in to save articles</NewsMarkMessage>
+                        <NewsMarkWrap>
+                            <NewsMark
+                                onMouseEnter={()=> setIsShown(true)}
+                                onMouseLeave={()=> setIsShown(false)}
+                                src={props.savedNews ? trash : bookmark}
+                                onClick={clickMarkHandler}
+                                isSaved={isSaved}
+                                isShown={isShown} />
+                        </NewsMarkWrap>
+                    </NewsMarkMessageWrap>
                 </NewsImageContainer>
                 <NewsTextWrap>
                     <NewsDate>{props.date}</NewsDate>

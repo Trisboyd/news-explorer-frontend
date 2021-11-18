@@ -15,12 +15,8 @@ flex-direction: column;
 justify-content: center;
 height: 20px;
 position: absolute;
-right: 0;
+right: 16px;
 top: 30%;
-
-@media ${devices.mobileS} {
-    right: 16px;
-}
 `
 
 export const NavMenuBar = styled.div`
@@ -72,6 +68,10 @@ margin-top: auto;
     height: 40px;
     width: 120px;
     margin-top: 
+}
+
+@media ${devices.mobileL} {
+    width: 0;
 }
 }
 

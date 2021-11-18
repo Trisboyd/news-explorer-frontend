@@ -41,12 +41,35 @@ export const NewsImage = styled.img`
     width: 100%;
     border-radius: 5% 5% 0 0;
 `
-export const NewsMarkWrap = styled.button`
-    width: 40px;
-    height: 40px;
+
+export const NewsMarkMessageWrap = styled.div`
+    display: flex;
+    flex-direction: row;
     position: absolute;
     right: 5%;
     top: 5%;
+`
+
+export const NewsMarkMessage = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    border-radius: 10px;
+    background: white;
+    margin: 0 2px 0 0;
+    padding: 11px 20px;
+    opacity: ${(props) => (props.isShown ? '1' : '0')};
+    transition: opacity .3s ease;
+`
+
+export const NewsMarkWrap = styled.button`
+    width: 40px;
+    height: 40px;
     background: white;
     border-radius: 8px;
     display: flex;
@@ -58,11 +81,11 @@ export const NewsMark = styled.img`
     max-width: 24px;
     max-height: 24px;
     margin: auto;
-    opacity: .3;
+    opacity: ${props => props.isSaved ? '1' : '0.3'};
     cursor: pointer;
-    transition: opacity .3s ease-in-out .3s;
+    transition: opacity .3s ease;
 
-    :hover {
+    &:hover {
         opacity: 1;
     }
 `

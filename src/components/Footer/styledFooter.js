@@ -22,7 +22,11 @@ font-weight: 400;
 font-size: 16px;
 line-height: 1.37;
 color: #B6BCBF;
-margin: 0 0 0 7vw;
+margin: auto 0 auto 7vw;
+
+@media ${devices.tablet} {
+margin-left: 5.2vw;
+}
 
 @media ${devices.mobileL} {
 margin: 40px auto 22px auto;

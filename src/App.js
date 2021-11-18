@@ -68,7 +68,7 @@ function App() {
 
   React.useEffect(() => {
     showSavedNews();
-  }, [location.pathname]);
+  }, [location]);
 
   return (
     <>
@@ -97,6 +97,7 @@ function App() {
             openPopupForm={openPopupForm}
             openPopupMenu={openPopupMenu}
             isPopupMenuOpen={isPopupMenuOpen}
+            loggedIn={loggedIn}
           />
           <SavedNews
             articles={articles}
