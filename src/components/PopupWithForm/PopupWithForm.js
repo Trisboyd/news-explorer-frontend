@@ -25,63 +25,66 @@ const PopupWithForm = (props) => {
 
     return (
         <Overlay isOpen={props.isOpen}>
-            <PopupContainer>
+            {/* <PopupContainer> */}
+            <PopupForm>
                 <PopupExit
                     onClick={props.closePopup}
                     height={'40px'}
                     width={'40px'}
-                    top={'-45px'}
-                    right={'-45px'}
-                    smallRight={'16px'}
+                    top={'-10%'}
+                    right={'-10%'}
+                    smallTop={'-5%'}
+                    smallRight={'5px'}
                     smallSize={'24px'} />
-                <PopupForm>
-                    <FormTitle>
-                        {formTitle[formState]}
-                    </FormTitle>
-                    <FormLabel>Email</FormLabel>
-                    <FormInput
-                        type='text'
-                        id='email'
-                        name='email'
-                        placeholder='Enter email'
-                        required></FormInput>
-                    <FormErrorMessage></FormErrorMessage>
-                    <FormLabel>Password</FormLabel>
-                    <FormInput
-                        type='text'
-                        id='password'
-                        name='password'
-                        placeholder='Enter password'
-                        required>
-                    </FormInput>
-                    <FormErrorMessage></FormErrorMessage>
-                    {formState === 1 ?
-                        <>
-                            <FormLabel>Username</FormLabel>
-                            <FormInput
-                                type='text'
-                                id='username'
-                                name='usernam'
-                                placeholder='Enter your username'
-                                required>
-                            </FormInput>
-                            <FormErrorMessage></FormErrorMessage>
-                        </> : ''}
-                    <MainButton
-                        color={'#2F71E5'}
-                        width={'360px'}
-                        position={'relative'}
-                        textColor={'#FFF'}>
-                        {formTitle[formState]}
-                    </MainButton>
-                    <FormSwitch>or
-                        <FormSwitchSpan
-                            onClick={swapFormTitle}>
-                            {otherTitle()}
-                        </FormSwitchSpan>
-                    </FormSwitch>
-                </PopupForm>
-            </PopupContainer>
+                <FormTitle>
+                    {formTitle[formState]}
+                </FormTitle>
+                <FormLabel>Email</FormLabel>
+                <FormInput
+                    type='text'
+                    id='email'
+                    name='email'
+                    placeholder='Enter email'
+                    required></FormInput>
+                <FormErrorMessage></FormErrorMessage>
+                <FormLabel>Password</FormLabel>
+                <FormInput
+                    type='text'
+                    id='password'
+                    name='password'
+                    placeholder='Enter password'
+                    required>
+                </FormInput>
+                <FormErrorMessage></FormErrorMessage>
+                {formState === 1 ?
+                    <>
+                        <FormLabel>Username</FormLabel>
+                        <FormInput
+                            type='text'
+                            id='username'
+                            name='usernam'
+                            placeholder='Enter your username'
+                            required>
+                        </FormInput>
+                        <FormErrorMessage></FormErrorMessage>
+                    </> : ''}
+                <MainButton
+                    color={'#2F71E5'}
+                    width={'360px'}
+                    mobileWidth={'90%'}
+                    height={'64px'}
+                    position={'relative'}
+                    textColor={'#FFF'}>
+                    {formTitle[formState]}
+                </MainButton>
+                <FormSwitch>or
+                    <FormSwitchSpan
+                        onClick={swapFormTitle}>
+                        {otherTitle()}
+                    </FormSwitchSpan>
+                </FormSwitch>
+            </PopupForm>
+            {/* </PopupContainer> */}
         </Overlay>
     )
 }

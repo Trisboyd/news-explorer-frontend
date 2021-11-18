@@ -3,11 +3,11 @@ import { devices } from '../../utilities/constants';
 import image from '../../images/main-background.png';
 
 export const MainLayout = styled.div`
-width: 100vw;
 min-height: 40vw;
 background-image: url(${image});
+background-position: center;
 background-color: black;
-background-size: contain;
+background-size: cover;
 background-repeat: no-repeat;
 display: flex;
 flex-direction: column;
@@ -22,7 +22,7 @@ flex-direction: column;
 }
 
 @media ${devices.mobileL}{
-    height: 120vw;
+    height: 125vw;
 }
 
 @media ${devices.mobileM}{
@@ -32,9 +32,11 @@ flex-direction: column;
 export const MainTitle = styled.h1`
 width: 42vw;
 font-size: 60px;
+font-family: 'Roboto Slab', sans-serif;
+font-weight: 400;
 line-height: 1.07;
 color: #FFFFFF;
-margin: auto;
+margin: 80px auto 0 auto;
 font-family: RobotoRegular;
 
 @media ${devices.laptop} {
@@ -55,9 +57,11 @@ font-family: RobotoRegular;
 export const MainSubtitle = styled.p`
 width: 42vw;
 font-size: 18px;
+font-family: 'Roboto', sans-serif;
+font-weight: 400;
 line-height: 1.33;
 color: #FFFFFF;
-margin: auto;
+margin: 32px auto 0 auto;
 
 @media ${devices.laptop} {
     width: 50vw;
@@ -72,10 +76,10 @@ margin: auto;
     margin-bottom: 122px;
 }
 `
-export const MainInputWrapper = styled.div`
+export const MainInputWrapper = styled.form`
 width: 42vw;
 height: 64px;
-margin: auto;
+margin: 88px auto 80px auto;
 position: relative;
 
 @media ${devices.laptop} {
@@ -101,6 +105,11 @@ padding-left: 24px;
 font-size: 16px;
 line-height: 1.37;
 color: #1A1B22;
+outline: none;
+
+@media ${devices.mobileL} {
+    margin-bottom: 16px;
+}
 `
 
 export const MainButton = styled.button`
@@ -113,6 +122,7 @@ margin: auto;
 background: ${props => props.color};
 box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
 border-radius: 100px;
+font-family: 'Roboto', sans-serif;
 font-weight: 500;
 font-size: 18px;
 line-height: 1.33;
@@ -122,18 +132,20 @@ align-items: center;
 text-align: center;
 color: ${props => props.textColor};
 border: ${props => props.border};
+outline: none;
+transition: background .2s ease-in-out;
 
 :hover {
 background: ${props => props.hoverColor};
 cursor: pointer;
 }
 
-:checked {
-color:  ${props => props.checkedColor};
+:active {
+background:  ${props => props.activeColor};
 }
 
-@media ${devices.tablet} {
+@media ${devices.mobileL} {
     position: relative;
-    width: 100%;
+    width: ${props => props.mobileWidth}};
 }
 `

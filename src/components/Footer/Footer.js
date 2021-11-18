@@ -10,14 +10,21 @@ const Footer = () => {
             <Copyright id='a'>© 2021 Supersite, Powered by News API</Copyright>
             <Links id='b'>
                 <TextLinks>
-                    <TextLink href='#'>Home</TextLink>
-                    <TextLink href='www.practicum.yandex.com'>Practicum by Yandex</TextLink>
+                    <TextLink href='/'>Home</TextLink>
+                    <TextLink
+                        href='http://www.practicum.yandex.com'
+                        target='_blank'>
+                        Practicum by Yandex</TextLink>
                 </TextLinks>
                 <SocialLinks>
-                    <SocialLink href='https://github.com/Trisboyd'>
+                    <SocialLink
+                        href='https://github.com/Trisboyd'
+                        target='_blank'>
                         <img src={github} alt='logo' />
                     </SocialLink>
-                    <SocialLink href='https://www.facebook.com/tristan.boyd.58'>
+                    <SocialLink
+                        href='https://www.facebook.com/tristan.boyd.58'
+                        target='_blank'>
                         <img src={facebook} alt='logo' />
                     </SocialLink>
                 </SocialLinks>

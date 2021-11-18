@@ -1,6 +1,6 @@
 // ___________________________________________________________Dependencies
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
 // _______________________________________________________________Components
 import Main from './components/Main/Main';
@@ -17,12 +17,11 @@ import PopupMenu from './components/PopupMenu/PopupMenu';
 
 // _______________________________________________constants
 import articles from './utilities/articles';
-import { GlobalStyle } from './components/Global/GlobalStyle';
 
 function App() {
 
   // _______________________________________________________________state variables
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
 
   const [isPopupFormOpen, setIsPopupFormOpen] = React.useState(false);
 
@@ -31,6 +30,17 @@ function App() {
   const [isPopupMenuOpen, setIsPopupMenuOpen] = React.useState(false);
 
   const [resultsNumber, setResultsNumber] = React.useState(3);
+
+  const [savedNews, setSavedNews] = React.useState(false);
+
+  const location = useLocation();
+
+  const showSavedNews = () => {
+    if (location.pathname === '/saved-news') {
+      setSavedNews(true);
+    }
+    else setSavedNews(false);
+  }
 
   // _______________________________________shifts # results shown from article search
   const showAllResults = () => {
@@ -56,9 +66,12 @@ function App() {
     setIsPopupMenuOpen(false);
   }
 
+  React.useEffect(() => {
+    showSavedNews();
+  }, [location]);
+
   return (
     <>
-      <GlobalStyle />
       <Switch>
         <Route exact path='/'>
           <Main
@@ -71,7 +84,7 @@ function App() {
           <NewsCardList
             //search={search} this will be a state variable for determining whether or not to show results
             //based on whether a search has been initiated
-            loggedIn={loggedIn}
+            savedNews={savedNews}
             articles={articles}
             resultsNumber={resultsNumber}
             showAllResults={showAllResults}
@@ -81,13 +94,14 @@ function App() {
         <Route path='/saved-news'>
           <SavedNewsHeader
             color={'#1A1B22'} //___color of header based on route
-            loggedIn={loggedIn}
             openPopupForm={openPopupForm}
             openPopupMenu={openPopupMenu}
             isPopupMenuOpen={isPopupMenuOpen}
+            loggedIn={loggedIn}
           />
           <SavedNews
-            articles={articles} />
+            articles={articles}
+            savedNews={savedNews} />
         </ Route>
       </Switch>
       {/* <Preloader /> */}
@@ -98,7 +112,8 @@ function App() {
         closePopup={closeAllPopups} />
       <PopupMessage
         isOpen={isPopupMessageOpen}
-        closePopup={closeAllPopups} />
+        closePopup={closeAllPopups}
+        openPopupForm={openPopupForm} />
       <PopupMenu
         popupMenuOpen={isPopupMenuOpen}
         closePopupMenu={closeAllPopups}

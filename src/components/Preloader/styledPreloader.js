@@ -32,6 +32,8 @@ export const PreloaderImage = styled.div`
     animation: ${rotate} .75s infinite linear;
 `
 export const PreloaderMessage = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     font-size: 18px;
     line-height: 1.33;
     text-align: center;

@@ -2,12 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import FontStyles from './components/Styles/FontStyles';
+import GlobalStyle from './components/Styles/GlobalStyle';
+import { Normalize } from 'styled-normalize';
 import { HashRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <HashRouter>
+    <GlobalStyle />
+    <FontStyles />
+    <Normalize />
     <App />
     </HashRouter>
   </React.StrictMode>,

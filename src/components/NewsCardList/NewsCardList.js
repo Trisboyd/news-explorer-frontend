@@ -1,7 +1,6 @@
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import { NewsListWrapper, NewsList, NewsListTitle, NewsListButton } from './styledNewsCardList';
-import { MainButton } from '../Main/styledMain';
 
 const NewsCardList = (props) => {
 
@@ -35,7 +34,7 @@ const NewsCardList = (props) => {
                         <NewsCard
                             key={props.articles.indexOf(article)}
                             //to be replaced with article._id
-                            loggedIn={props.loggedIn}
+                            savedNews={props.savedNews}
                             label={article.label}
                             image={article.image}
                             date={article.date}
@@ -46,9 +45,10 @@ const NewsCardList = (props) => {
             </NewsList>
             <NewsListButton
                 width={'288px'}
-                color={'#E8E8E8'}
+                color={'#FFF'}
                 textColor={'#000'}
-                onClick={resultsClickHandler}>
+                onClick={resultsClickHandler}
+                hoverColor={'#E8E8E8'}>
                 {message}
             </NewsListButton>
         </ NewsListWrapper>

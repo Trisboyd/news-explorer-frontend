@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { devices } from '../../utilities/constants';
-
-export const NavWrapper = styled.div`
+import { Link } from 'react-router-dom';
+ 
+export const NavWrapper = styled.nav`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
@@ -14,7 +15,7 @@ flex-direction: column;
 justify-content: center;
 height: 20px;
 position: absolute;
-right: 0;
+right: 16px;
 top: 30%;
 `
 
@@ -30,16 +31,19 @@ margin-top: 4px;
 }
 `
 
-export const NavLink = styled.a`
+export const NavLink = styled(Link)`
 display: flex;
 justify-content: center;
+font-family: 'Roboto', sans-serif;
+font-weight: 500;
 font-size: 18px;
 line-height: 1.33;
 display: flex;
 align-items: center;
 text-align: center;
 margin: auto 42px auto 0;
-/* height: 80px; */
+height: 80px;
+text-decoration: none;
 color: ${props => props.color};
 
 :hover {
@@ -61,18 +65,29 @@ margin-top: auto;
 }
 
 @media ${devices.tablet} {
-    height: 24px;
+    height: 40px;
     width: 120px;
     margin-top: 
+}
+
+@media ${devices.mobileL} {
+    width: 0;
 }
 }
 
 @media ${devices.tablet} {
     margin: auto 20px auto 0;
+    height: 66px;
 }
 
 @media ${devices.mobileL} {
     visibility: hidden;
     width: 0;
 }
+`
+export const NavLogout = styled.div`
+background-image: ${props => props.image};
+width: 24px;
+height: 24px;
+margin-left: 10%;
 `

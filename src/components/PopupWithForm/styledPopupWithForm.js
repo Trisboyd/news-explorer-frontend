@@ -18,11 +18,11 @@ export const Overlay = styled.section`
     transition: visibility 1s, opacity 1s ease;
     `
 export const PopupContainer = styled.div`
-    position: relative;
     max-width: 430px;
     display: flex;
     justify-content: center;
     z-index: 2;
+    position: relative;
 
     @media ${devices.mobileL} {
         max-width: 100vw;
@@ -43,25 +43,32 @@ export const PopupExit = styled.button`
     transition: opacity .5s ease-in-out .5s;
 
     @media ${devices.mobileL} {
+        top: ${props => props.smallTop};
         right: ${props => props.smallRight};
         height: ${props => props.smallSize};
         width: ${props => props.smallSize};
+        margin-top: ${props => props.mobileMargin};
     }
     `
 export const PopupForm = styled.form`
-    width: 100%;
+    width: 430px;
     background: #FFFFFF;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     z-index: 3;
+    position: relative;
 
-    @media screen and (max-width: 680px) {
-    width: 88.125%;
+    @media ${devices.mobileL} {
+    width: 320px;
+    position: absolute;
+    top: 56px;
+    padding-bottom: 70%;
+    }
     `
 export const FormTitle = styled.h3`
-    font-style: normal;
+    font-family: 'Roboto', sans-serif;
     font-weight: 900;
     font-size: 24px;
     line-height: 29px;
@@ -84,18 +91,23 @@ export const FormInput = styled.input`
 
     :focus {
         outline: none;
+        border-bottom: 1px solid #000;
     }
     :last-of-type {
         margin-bottom: 39px;
     }
 `
 export const FormLabel = styled.label`
+    font-family: sans-serif;
+    font-weight: 400;
     font-size: 12px;
     line-height: 15px;
     color: #2F71E5;
     margin: 31px 0 9px 36px;
 `
 export const FormSwitch = styled.p`
+    font-family: sans-serif;
+    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
@@ -108,6 +120,8 @@ export const FormSwitchSpan = styled.a`
     margin-left: 8px;
 `
 export const FormErrorMessage = styled.span`
+    font-family: sans-serif;
+    font-weight: 400;
     font-size: 12px;
     line-height: 15px;
     color: #FF0000;

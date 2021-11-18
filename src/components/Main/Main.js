@@ -25,17 +25,19 @@ const Main = (props) => {
             <MainInputWrapper>
                 <MainInput
                     type='text'
-                    name='search' />
+                    name='search'
+                    placeholder='Enter topic' />
                 <MainButton
                     color={'#2F71E5'}
                     width={'27%'}
+                    mobileWidth={'100%'}
                     height={'100%'}
                     position={'absolute'}
                     top={'0'}
                     right={'0'}
                     textColor={'#FFF'}
                     hoverColor={'#347EFF'}
-                    checkedColor={'#2A65CC'}>
+                    activeColor={'#2A65CC'}>
                     Search</MainButton>
             </MainInputWrapper>
         </MainLayout>
