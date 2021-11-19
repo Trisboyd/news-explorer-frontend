@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { devices } from '../../utilities/constants';
 
 export const NewsWrap = styled.article`
     display: flex;
@@ -8,14 +7,6 @@ export const NewsWrap = styled.article`
     background: #FFF;
     border-radius: 5%;
     margin: auto;
-
-    :last-of-type {
-        margin-bottom: 64px;
-    }
-
-    @media ${devices.mobileL} {
-    max-width: 85.6vw;
-    }
 `
 export const NewsImageContainer = styled.div`
     position: relative;
@@ -30,6 +21,10 @@ export const NewsImageLabel = styled.div`
     box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);
     border-radius: 10px;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -105,7 +100,6 @@ export const NewsDate = styled.p`
     align-items: center;
     color: #B6BCBF;
     margin: 20px 0 0 0;
-    font-family: SourceSansPro;
 `
 export const NewsHeadline = styled.h3`
     font-family: 'Roboto Slab', sans-serif;
@@ -139,5 +133,4 @@ export const NewsSource = styled.p`
     color: #B6BCBF;
     justify-self: flex-end;
     margin-bottom: 24px;
-    font-family: RobotoSlab;
 `

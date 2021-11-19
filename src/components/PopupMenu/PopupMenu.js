@@ -1,7 +1,7 @@
 import React from 'react';
 import { MainButton } from '../Main/styledMain';
 import { Overlay, PopupExit } from '../PopupWithForm/styledPopupWithForm';
-import { MenuHomeLink, MenuPopupContainer, MenuPopupWrap } from './styledPopupMenu';
+import { MenuLink, MenuPopupContainer, MenuPopupWrap } from './styledPopupMenu';
 
 const PopupMenu = (props) => {
 
@@ -24,10 +24,16 @@ const PopupMenu = (props) => {
                     right={'16px'}
                     onClick={closePopupMenu} />
                 <MenuPopupContainer>
-                    <MenuHomeLink
+                    <MenuLink
                         onClick={closePopupMenu}
+                        to={'/'}
                     >Home
-                    </MenuHomeLink>
+                    </MenuLink>
+                    <MenuLink
+                        onClick={closePopupMenu}
+                        to={'/saved-news'}
+                    >Saved Articles
+                    </MenuLink>
                     <MainButton
                         width={'288px'}
                         color={'rgba(0, 0, 0, 0)'}

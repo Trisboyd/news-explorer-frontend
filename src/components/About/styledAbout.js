@@ -18,9 +18,20 @@ import { devices } from '../../utilities/constants';
     max-width: 464px;
     max-height: 464px;
     border-radius: 50%;
+    object-fit: cover;
 
+    @media ${devices.laptop} {
+    max-height: 317px;
+    }
+    @media ${devices.tablet} {
+    max-height: 238px;
+    }
     @media ${devices.mobileL} {
     width: 90vw;
+    max-height: 463px;
+    }
+    @media ${devices.mobileS} {
+    max-height: 288px;
     }
     `
     export const AboutInfoWrapper = styled.div`

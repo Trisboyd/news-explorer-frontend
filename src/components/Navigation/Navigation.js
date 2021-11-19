@@ -7,15 +7,19 @@ import logoutWhite from '../../images/logoutWhite.png';
 import logoutBlack from '../../images/logout-black.png';
 
 const Navigation = (props) => {
-
-    const [menuImage, setMenuImage] = React.useState(`url(${menu})`);
-
+    
+    // ________________________________determine location on web app
     const location = useLocation();
 
+    // _________________________________________logout colors
     const whiteLogout = `url(${logoutWhite})`;
 
     const blackLogout = `url(${logoutBlack})`;
 
+    // _______________________________________________________________state variable for menu color
+    const [menuImage, setMenuImage] = React.useState(`url(${menu})`);
+
+    // ________________________________________function for setting menu color
     const setMenuItems = () => {
         if (location.pathname === '/saved-news') {
             setMenuImage(`url(${menuBlack})`)
@@ -54,13 +58,15 @@ const Navigation = (props) => {
             </NavMenu>
             <NavLink
                 color={props.color}
-                to='/'>
+                to='/'
+                currentPage={location.pathname === '/' && true} >
                 Home
             </NavLink>
-            {props.loggedIn ? <NavLink
+            {props.loggedIn && <NavLink
                 color={props.color}
-                to='/saved-news'>
-                Saved Articles</NavLink> : ''}
+                to='/saved-news'
+                currentPage={location.pathname === '/saved-news' && true}>
+                Saved Articles</NavLink>}
             <NavLink
                 onClick={openPopupForm}
                 color={props.color}
