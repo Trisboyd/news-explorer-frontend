@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { devices } from '../../utilities/constants';
 
 export const SavedHeaderWrapper = styled.section`
     display: flex;
@@ -21,6 +22,11 @@ export const SavedMessage = styled.h3`
     line-height: 1.15;
     color: #1A1B22;
     margin: 28px 0 30px 7vw;
+
+    @media ${devices.mobileL} {
+    font-size: 30px;
+    line-height: 1.13;
+    }
 `
 export const SavedKeywords = styled.p`
     font-family: 'Roboto', sans-serif;

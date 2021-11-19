@@ -42,12 +42,12 @@ display: flex;
 align-items: center;
 text-align: center;
 margin: auto 42px auto 0;
-height: 80px;
+height: 78px;
 text-decoration: none;
 color: ${props => props.color};
+border-bottom: ${props => props.currentPage && `3px solid ${props.color}`};
 
 :hover {
-border-bottom: 3px solid ${props => props.color};
 cursor: pointer;
 }
 
@@ -60,12 +60,11 @@ height: 48px;
 margin-top: auto;
 
 @media ${devices.laptop} {
-    height: 40px;
+    height: 38px;
     width: 152px;
 }
 
 @media ${devices.tablet} {
-    height: 40px;
     width: 120px;
     margin-top: 
 }
@@ -77,7 +76,7 @@ margin-top: auto;
 
 @media ${devices.tablet} {
     margin: auto 20px auto 0;
-    height: 66px;
+    height: 64px;
 }
 
 @media ${devices.mobileL} {

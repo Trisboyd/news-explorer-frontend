@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const MenuPopupWrap = styled.div`
 height: 30%;
@@ -14,11 +15,12 @@ flex-direction: column;
 padding-left: 16px;
 `
 
-export const MenuHomeLink = styled.p`
+export const MenuLink = styled(Link)`
 font-family: 'Roboto', sans-serif;
 font-weight: 500;
 font-size: 18px;
 line-height: 3.11;
 color: #FFFFFF;
+text-decoration: none;
 cursor: pointer;
 `

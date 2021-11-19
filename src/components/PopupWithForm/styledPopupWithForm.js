@@ -78,8 +78,8 @@ export const FormTitle = styled.h3`
     `
 export const FormInput = styled.input`
     width: 83.5%;
-    font-style: normal;
-    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     vertical-align: text-top;
@@ -98,7 +98,7 @@ export const FormInput = styled.input`
     }
 `
 export const FormLabel = styled.label`
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
@@ -106,7 +106,7 @@ export const FormLabel = styled.label`
     margin: 31px 0 9px 36px;
 `
 export const FormSwitch = styled.p`
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;

@@ -37,7 +37,6 @@ font-weight: 400;
 line-height: 1.07;
 color: #FFFFFF;
 margin: 80px auto 0 auto;
-font-family: RobotoRegular;
 
 @media ${devices.laptop} {
     width: 50vw;
@@ -132,7 +131,7 @@ align-items: center;
 text-align: center;
 color: ${props => props.textColor};
 border: ${props => props.border};
-outline: none;
+outline: 0;
 transition: background .2s ease-in-out;
 
 :hover {
