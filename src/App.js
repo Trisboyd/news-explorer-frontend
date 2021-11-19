@@ -2,6 +2,9 @@
 import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 
+// _________________________________________________________________API classes
+import newsApi from './utilities/NewsApi';
+
 // _______________________________________________________________Components
 import Main from './components/Main/Main';
 import SavedNewsHeader from './components/SavedNewsHeader/SavedNewsHeader';
@@ -69,6 +72,31 @@ function App() {
   React.useEffect(() => {
     showSavedNews();
   }, [location]);
+
+  let curDate = new Date();
+
+  const formatDate = (date) => {
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    return `${year}-${month}-${day}`;
+  }
+
+  const weekEarlier = (date) => {
+    let pastDate = date.getDate() - 7;
+    let oldDate = date;
+    oldDate.setDate(pastDate);
+    return oldDate
+  }
+  
+  newsApi.getArticles('nature', formatDate(weekEarlier(curDate)), formatDate(curDate)).then(res => {
+    console.log(res.json());
+  })
+  .catch(error => { console.log(error) });
+  // newsApi.getArticles().then(res => {
+  //   console.log(res);
+  // })
+  // .catch(error => { console.log(error) });
 
   return (
     <>
