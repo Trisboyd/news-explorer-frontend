@@ -1,13 +1,13 @@
 import React from 'react';
 import { MainButton } from '../Main/styledMain';
 import {
-    Overlay, PopupExit, PopupForm, PopupContainer,
-    FormTitle, FormInput, FormLabel, FormSwitch, FormSwitchSpan, FormErrorMessage
+    Overlay, PopupExit, PopupForm, FormTitle, FormInput, FormLabel, FormSwitch, FormSwitchSpan, FormErrorMessage
 } from './styledPopupWithForm';
 
 const PopupWithForm = (props) => {
 
-    //form state for determining which form should be shown (sign in or sign up)
+    //_________form state for determining which form should be shown (sign in or sign up)
+    // ____________________________________________________0 = signin, 1 = signup
     const [formState, setFormState] = React.useState(0);
 
     const formTitle = ['Sign in', 'Sign up'];
@@ -26,7 +26,8 @@ const PopupWithForm = (props) => {
     return (
         <Overlay isOpen={props.isOpen}>
             {/* <PopupContainer> */}
-            <PopupForm>
+            <PopupForm 
+            onSubmit={formState === 0 ? props.login : props.register}>
                 <PopupExit
                     onClick={props.closePopup}
                     height={'40px'}
@@ -41,7 +42,7 @@ const PopupWithForm = (props) => {
                 </FormTitle>
                 <FormLabel>Email</FormLabel>
                 <FormInput
-                    type='text'
+                    type='email'
                     id='email'
                     name='email'
                     placeholder='Enter email'
@@ -50,6 +51,8 @@ const PopupWithForm = (props) => {
                 <FormLabel>Password</FormLabel>
                 <FormInput
                     type='text'
+                    min='2'
+                    max='40'
                     id='password'
                     name='password'
                     placeholder='Enter password'
@@ -61,6 +64,8 @@ const PopupWithForm = (props) => {
                         <FormLabel>Username</FormLabel>
                         <FormInput
                             type='text'
+                            min='2'
+                            max='40'
                             id='username'
                             name='usernam'
                             placeholder='Enter your username'

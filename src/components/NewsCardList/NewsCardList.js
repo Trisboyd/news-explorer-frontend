@@ -29,18 +29,18 @@ const NewsCardList = (props) => {
         <NewsListWrapper>
             {props.loggedIn ? '' : <NewsListTitle>Search results</NewsListTitle>}
             <NewsList>
-                {props.articles.slice(0, props.resultsNumber).map((article) => {
+                {props.articles.slice(0, props.articles.length).map((article) => {
                     return (
                         <NewsCard
                             key={props.articles.indexOf(article)}
                             //to be replaced with article._id
                             savedNews={props.savedNews}
-                            label={article.label}
-                            image={article.image}
-                            date={article.date}
-                            headline={article.headline}
-                            text={article.text}
-                            source={article.source} />)
+                            // label={article.label}
+                            image={article.urlImage}
+                            date={article.publishedAt}
+                            headline={article.title}
+                            text={article.description}
+                            source={article.source.name} />)
                 })}
             </NewsList>
             <NewsListButton

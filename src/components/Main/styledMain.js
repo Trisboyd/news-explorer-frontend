@@ -17,10 +17,6 @@ flex-direction: column;
     background-size: cover;
 }
 
-@media ${devices.tablet}{
-    height: 75vw;
-}
-
 @media ${devices.mobileL}{
     height: 125vw;
 }
@@ -101,6 +97,8 @@ backdrop-filter: blur(8px);
 border-radius: 100px;
 margin: auto;
 padding-left: 24px;
+font-family: 'Roboto', sans-serif;
+font-weight: 400;
 font-size: 16px;
 line-height: 1.37;
 color: #1A1B22;

@@ -1,9 +1,11 @@
 // ___________________________________________________________Dependencies
 import React from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
+import { CurrentUserContext } from './contexts/CurrentUserContext';
 
 // _________________________________________________________________API classes
 import newsApi from './utilities/NewsApi';
+import mainApi from './utilities/MainApi';
 
 // _______________________________________________________________Components
 import Main from './components/Main/Main';
@@ -19,13 +21,11 @@ import PopupMenu from './components/PopupMenu/PopupMenu';
 // import NoResults from './components/NoResults/NoResults';
 
 // _______________________________________________constants
-import articles from './utilities/articles';
+// import articles from './utilities/articles';
 
 function App() {
 
-  // _______________________________________________________________state variables
-  const [loggedIn, setLoggedIn] = React.useState(true);
-
+  // ________________________________________________________________________________________POPUPS
   const [isPopupFormOpen, setIsPopupFormOpen] = React.useState(false);
 
   const [isPopupMessageOpen, setIsPopupMessageOpen] = React.useState(false);
@@ -73,12 +73,17 @@ function App() {
     showSavedNews();
   }, [location]);
 
-  let curDate = new Date();
+  // ______________________________________________________________________________Articles
+
+  const [articles, setArticles] = React.useState([]);
+
+  const curDate = new Date();
+  const curDate2 = new Date();
 
   const formatDate = (date) => {
     let day = date.getDate();
     let year = date.getFullYear();
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     return `${year}-${month}-${day}`;
   }
 
@@ -88,64 +93,138 @@ function App() {
     oldDate.setDate(pastDate);
     return oldDate
   }
-  
-  newsApi.getArticles('nature', formatDate(weekEarlier(curDate)), formatDate(curDate)).then(res => {
-    console.log(res.json());
-  })
-  .catch(error => { console.log(error) });
-  // newsApi.getArticles().then(res => {
-  //   console.log(res);
-  // })
-  // .catch(error => { console.log(error) });
+
+  const displayArticles = () => {
+    newsApi.getArticles('nature', formatDate(weekEarlier(curDate)), formatDate(curDate2))
+      .then(res => {
+        setArticles([...articles, ...res.articles]);
+      })
+      .catch(error => { console.log(error) });
+  }
+
+  // _________________________________________________________________________________________Authorization
+
+  // _______________________________________________state variables for loggedin and registration 
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
+  const [isRegistered, setIsRegistered] = React.useState(false);
+
+  // ____________________________________________token variable
+  const token = localStorage.getItem('token');
+
+  // ________________________________________history hook from react router
+  const history = useHistory();
+
+  // ____________________________________________registration function
+  const handleRegister = (inputs) => {
+    mainApi.register(inputs)
+    .then((response) => {
+      if (response) {
+        console.log(response);
+        setIsRegistered(true);
+        setIsPopupMessageOpen(true);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      setIsRegistered(false);
+    })
+  }
+
+  // _________________________________________login function
+  const handleLogin = (inputs) => {
+    mainApi.signin(inputs)
+    .then(response => {
+      if (!response) {
+        return;
+      }
+      if (response.token) {
+        setLoggedIn(true);
+        retrieveUserInfo();
+      }
+    })
+    .catch(error => console.log(error));
+  }
+
+  // __________________________________________logout
+  const signout = () => {
+    history.push('/');
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+  }
+
+  // ____________________________________________________________________________________USER INFO
+
+  const [currentUser, setCurrentUser] = React.useState({
+    name: '',
+    email: '',
+    id: ''
+  });
+
+  const retrieveUserInfo = () => {
+    mainApi.getCurrentUser().then(response => {
+      setCurrentUser({
+        name: response.name,
+        email: response.email,
+        id: response._id
+      })
+    })
+  }
+
+  React.useEffect(() => {
+    retrieveUserInfo();
+  }, []);
 
   return (
     <>
-      <Switch>
-        <Route exact path='/'>
-          <Main
-            loggedIn={loggedIn}
-            openPopupForm={openPopupForm}
-            openPopupMenu={openPopupMenu}
-            isPopupMenuOpen={isPopupMenuOpen}
-            color={'#FFF'} //___color of header based on route
-          />
-          <NewsCardList
-            //search={search} this will be a state variable for determining whether or not to show results
-            //based on whether a search has been initiated
-            savedNews={savedNews}
-            articles={articles}
-            resultsNumber={resultsNumber}
-            showAllResults={showAllResults}
-            resetResults={resetResults} />
-          <About />
-        </ Route>
-        <Route path='/saved-news'>
-          <SavedNewsHeader
-            color={'#1A1B22'} //___color of header based on route
-            openPopupForm={openPopupForm}
-            openPopupMenu={openPopupMenu}
-            isPopupMenuOpen={isPopupMenuOpen}
-            loggedIn={loggedIn}
-          />
-          <SavedNews
-            articles={articles}
-            savedNews={savedNews} />
-        </ Route>
-      </Switch>
-      {/* <Preloader /> */}
-      {/* <NoResults /> */}
-      <Footer />
-      <PopupWithForm
-        isOpen={isPopupFormOpen}
-        closePopup={closeAllPopups} />
-      <PopupMessage
-        isOpen={isPopupMessageOpen}
-        closePopup={closeAllPopups}
-        openPopupForm={openPopupForm} />
-      <PopupMenu
-        popupMenuOpen={isPopupMenuOpen}
-        closePopupMenu={closeAllPopups}
-        openPopupForm={openPopupForm} />
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <Route exact path='/'>
+            <Main
+              loggedIn={loggedIn}
+              openPopupForm={openPopupForm}
+              openPopupMenu={openPopupMenu}
+              isPopupMenuOpen={isPopupMenuOpen}
+              color={'#FFF'} //___color of header based on route
+            />
+            <NewsCardList
+              //search={search} this will be a state variable for determining whether or not to show results
+              //based on whether a search has been initiated
+              savedNews={savedNews}
+              articles={articles}
+              resultsNumber={resultsNumber}
+              showAllResults={showAllResults}
+              resetResults={resetResults} />
+            <About />
+          </ Route>
+          <Route path='/saved-news'>
+            <SavedNewsHeader
+              color={'#1A1B22'} //___color of header based on route
+              openPopupForm={openPopupForm}
+              openPopupMenu={openPopupMenu}
+              isPopupMenuOpen={isPopupMenuOpen}
+              loggedIn={loggedIn}
+            />
+            <SavedNews
+              articles={articles}
+              savedNews={savedNews} />
+          </ Route>
+        </Switch>
+        {/* <Preloader /> */}
+        {/* <NoResults /> */}
+        <Footer />
+        <PopupWithForm
+          isOpen={isPopupFormOpen}
+          closePopup={closeAllPopups} />
+        <PopupMessage
+          isOpen={isPopupMessageOpen}
+          closePopup={closeAllPopups}
+          openPopupForm={openPopupForm} />
+        <PopupMenu
+          popupMenuOpen={isPopupMenuOpen}
+          closePopupMenu={closeAllPopups}
+          openPopupForm={openPopupForm} />
+      </CurrentUserContext.Provider>
     </>
   );
 }

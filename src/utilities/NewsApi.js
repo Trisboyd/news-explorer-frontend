@@ -6,8 +6,7 @@ class NewsApi {
     }
 
     getArticles(q, from, to) {
-        // return fetch(`https://newsapi.org/v2/everything?q=nature&from=2021-11-18&to=2021-11-11&apiKey=${this._key}`, {
-        return fetch(`${this.url}q=${q}&from=${from}&to=${to}&pageSize=100&apiKey=${this._key}`, {
+        return fetch(`${this._url}q=${q}&from=${from}&to=${to}&pageSize=100&apiKey=${this._key}`, {
             headers: {
                 // "Content-Type": "application/json"
             }
