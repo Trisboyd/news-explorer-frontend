@@ -45,7 +45,7 @@ margin: auto 42px auto 0;
 height: 78px;
 text-decoration: none;
 color: ${props => props.color};
-border-bottom: ${props => props.currentPage && `3px solid ${props.color}`};
+border-bottom: ${props => props.currentpage && `3px solid ${props.color}`};
 
 :hover {
 cursor: pointer;

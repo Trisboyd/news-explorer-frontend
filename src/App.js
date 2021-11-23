@@ -17,6 +17,7 @@ import Footer from './components/Footer/Footer';
 import PopupWithForm from './components/PopupWithForm/PopupWithForm';
 import PopupMessage from './components/PopupMessage/PopupMessage';
 import PopupMenu from './components/PopupMenu/PopupMenu';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 // import Preloader from './components/Preloader/Preloader';
 // import NoResults from './components/NoResults/NoResults';
 
@@ -73,13 +74,17 @@ function App() {
     showSavedNews();
   }, [location]);
 
-  // ______________________________________________________________________________Articles
+  // _______________________________________________________________________________________Articles
 
   const [articles, setArticles] = React.useState([]);
 
+  const [label, setLabel] = React.useState('');
+
+  // ________________________________________current date
   const curDate = new Date();
   const curDate2 = new Date();
 
+  // ________________________________________format date to be read by newsApi
   const formatDate = (date) => {
     let day = date.getDate();
     let year = date.getFullYear();
@@ -87,6 +92,7 @@ function App() {
     return `${year}-${month}-${day}`;
   }
 
+  // ___________________________________________calculate one week from current date
   const weekEarlier = (date) => {
     let pastDate = date.getDate() - 7;
     let oldDate = date;
@@ -94,10 +100,16 @@ function App() {
     return oldDate
   }
 
-  const displayArticles = () => {
-    newsApi.getArticles('nature', formatDate(weekEarlier(curDate)), formatDate(curDate2))
+  // _______________________________________________get articles from newsAPi
+  const displayArticles = (input) => {
+    setLabel(input);
+    newsApi.getArticles(
+      input,
+      formatDate(weekEarlier(curDate)),
+      formatDate(curDate2))
       .then(res => {
         setArticles([...articles, ...res.articles]);
+        console.log(res.articles.slice(0,3));
       })
       .catch(error => { console.log(error) });
   }
@@ -118,32 +130,32 @@ function App() {
   // ____________________________________________registration function
   const handleRegister = (inputs) => {
     mainApi.register(inputs)
-    .then((response) => {
-      if (response) {
-        console.log(response);
-        setIsRegistered(true);
-        setIsPopupMessageOpen(true);
-      }
-    })
-    .catch(error => {
-      console.log(error);
-      setIsRegistered(false);
-    })
+      .then((response) => {
+        if (response) {
+          console.log(response);
+          setIsRegistered(true);
+          setIsPopupMessageOpen(true);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        setIsRegistered(false);
+      })
   }
 
   // _________________________________________login function
   const handleLogin = (inputs) => {
     mainApi.signin(inputs)
-    .then(response => {
-      if (!response) {
-        return;
-      }
-      if (response.token) {
-        setLoggedIn(true);
-        retrieveUserInfo();
-      }
-    })
-    .catch(error => console.log(error));
+      .then(response => {
+        if (!response) {
+          return;
+        }
+        if (response.token) {
+          setLoggedIn(true);
+          retrieveUserInfo();
+        }
+      })
+      .catch(error => console.log(error));
   }
 
   // __________________________________________logout
@@ -162,11 +174,11 @@ function App() {
   });
 
   const retrieveUserInfo = () => {
-    mainApi.getCurrentUser().then(response => {
+    mainApi.getCurrentUser(token).then(response => {
       setCurrentUser({
-        name: response.name,
-        email: response.email,
-        id: response._id
+        name: response.user.name,
+        email: response.user.email,
+        id: response.user._id
       })
     })
   }
@@ -174,6 +186,7 @@ function App() {
   React.useEffect(() => {
     retrieveUserInfo();
   }, []);
+
 
   return (
     <>
@@ -186,10 +199,11 @@ function App() {
               openPopupMenu={openPopupMenu}
               isPopupMenuOpen={isPopupMenuOpen}
               color={'#FFF'} //___color of header based on route
+              signout={signout}
+              handleSearch={displayArticles}
             />
             <NewsCardList
-              //search={search} this will be a state variable for determining whether or not to show results
-              //based on whether a search has been initiated
+              label={label}
               savedNews={savedNews}
               articles={articles}
               resultsNumber={resultsNumber}
@@ -197,25 +211,32 @@ function App() {
               resetResults={resetResults} />
             <About />
           </ Route>
-          <Route path='/saved-news'>
-            <SavedNewsHeader
-              color={'#1A1B22'} //___color of header based on route
-              openPopupForm={openPopupForm}
-              openPopupMenu={openPopupMenu}
-              isPopupMenuOpen={isPopupMenuOpen}
-              loggedIn={loggedIn}
-            />
-            <SavedNews
-              articles={articles}
-              savedNews={savedNews} />
-          </ Route>
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            path='/saved-news'
+            component={<>
+              <SavedNewsHeader
+                color={'#1A1B22'} //___color of header based on route
+                openPopupForm={openPopupForm}
+                openPopupMenu={openPopupMenu}
+                isPopupMenuOpen={isPopupMenuOpen}
+                loggedIn={loggedIn}
+                signout={signout}
+              />
+              <SavedNews
+                articles={articles}
+                savedNews={savedNews} />
+            </>}>
+          </ ProtectedRoute>
         </Switch>
         {/* <Preloader /> */}
         {/* <NoResults /> */}
         <Footer />
         <PopupWithForm
           isOpen={isPopupFormOpen}
-          closePopup={closeAllPopups} />
+          closePopup={closeAllPopups}
+          handleLogin={handleLogin}
+          handleRegister={handleRegister} />
         <PopupMessage
           isOpen={isPopupMessageOpen}
           closePopup={closeAllPopups}

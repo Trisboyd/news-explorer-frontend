@@ -6,6 +6,7 @@ import {
 
 const PopupWithForm = (props) => {
 
+    // ___________________________________________________________________________________Form Type Functions
     //_________form state for determining which form should be shown (sign in or sign up)
     // ____________________________________________________0 = signin, 1 = signup
     const [formState, setFormState] = React.useState(0);
@@ -23,13 +24,65 @@ const PopupWithForm = (props) => {
         return formTitle.filter((title) => title !== formTitle[formState]);
     }
 
+    // ________________________________________________________________________Inputs
+    const [inputs, setInputs] = React.useState({
+        email: '',
+        password: '',
+        name: ''
+    })
+
+    // ___________________________________________________________________change inputs based on typing
+    const handleChange = ({ target }) => {
+        const { name, value } = target;
+        setInputs({
+            ...inputs,
+            [name]: value
+        });
+    };
+
+    // _______________________________________________________________________reset inputs
+    const resetInputs = () => {
+        setInputs({
+            email: '',
+            password: '',
+            name: ''
+        })
+    }
+
+    // _________________________________________________________________________close popoup
+
+    const closePopup = () => {
+        resetInputs();
+        props.closePopup();
+    }
+
+    // ______________________________________________________________________login function
+    const handleLogin = (event) => {
+        event.preventDefault();
+        if (inputs.email && inputs.password) {
+            props.handleLogin(inputs);
+            closePopup();
+        }
+        else console.log('All inputs required');
+    }
+
+    // ___________________________________________________________________________register function
+    const handleRegister = (event) => {
+        event.preventDefault();
+        if (inputs.email && inputs.password && inputs.name) {
+            props.handleRegister(inputs);
+            closePopup();
+        }
+        else console.log('All inputs required');
+    }
+
     return (
         <Overlay isOpen={props.isOpen}>
             {/* <PopupContainer> */}
-            <PopupForm 
-            onSubmit={formState === 0 ? props.login : props.register}>
+            <PopupForm
+                onSubmit={formState === 0 ? handleLogin : handleRegister}>
                 <PopupExit
-                    onClick={props.closePopup}
+                    onClick={closePopup}
                     height={'40px'}
                     width={'40px'}
                     top={'-10%'}
@@ -45,8 +98,10 @@ const PopupWithForm = (props) => {
                     type='email'
                     id='email'
                     name='email'
+                    value={inputs.email}
                     placeholder='Enter email'
-                    required></FormInput>
+                    required
+                    onChange={handleChange}></FormInput>
                 <FormErrorMessage></FormErrorMessage>
                 <FormLabel>Password</FormLabel>
                 <FormInput
@@ -55,7 +110,9 @@ const PopupWithForm = (props) => {
                     max='40'
                     id='password'
                     name='password'
+                    value={inputs.password}
                     placeholder='Enter password'
+                    onChange={handleChange}
                     required>
                 </FormInput>
                 <FormErrorMessage></FormErrorMessage>
@@ -66,10 +123,12 @@ const PopupWithForm = (props) => {
                             type='text'
                             min='2'
                             max='40'
-                            id='username'
-                            name='usernam'
+                            id='name'
+                            name='name'
+                            value={inputs.name}
                             placeholder='Enter your username'
-                            required>
+                            required
+                            onChange={handleChange}>
                         </FormInput>
                         <FormErrorMessage></FormErrorMessage>
                     </> : ''}

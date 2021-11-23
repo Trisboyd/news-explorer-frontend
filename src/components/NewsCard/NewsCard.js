@@ -20,8 +20,10 @@ const NewsCard = (props) => {
             setBookmark(markBlue)
             setIsSaved(true);
         }
-        else {setBookmark(mark)
-        setIsSaved(false)};
+        else {
+            setBookmark(mark)
+            setIsSaved(false)
+        };
         console.log(isSaved);
     }
 
@@ -33,11 +35,11 @@ const NewsCard = (props) => {
                     <NewsImage src={props.image} />
                     <NewsMarkMessageWrap>
                         <NewsMarkMessage
-                        isShown={isShown}>Sign in to save articles</NewsMarkMessage>
+                            isShown={isShown}>Sign in to save articles</NewsMarkMessage>
                         <NewsMarkWrap>
                             <NewsMark
-                                onMouseEnter={()=> setIsShown(true)}
-                                onMouseLeave={()=> setIsShown(false)}
+                                onMouseEnter={() => setIsShown(true)}
+                                onMouseLeave={() => setIsShown(false)}
                                 src={props.savedNews ? trash : bookmark}
                                 onClick={clickMarkHandler}
                                 isSaved={isSaved}

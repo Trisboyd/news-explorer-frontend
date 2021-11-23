@@ -1,43 +1,55 @@
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import { NewsListWrapper, NewsList, NewsListTitle, NewsListButton } from './styledNewsCardList';
+import { months } from '../../utilities/constants';
 
 const NewsCardList = (props) => {
 
-    const [message, setMessage] = React.useState('Show more');
+    const [resultsNum, setResultsNum] = React.useState(3);
 
-    const resultsClickHandler = () => {
-        if (props.resultsNumber === 3) {
-            showAllResults();
-            setMessage('Show Less');
-        }
-        else if (props.resultsNumber !== 3) {
-            resetResults();
-            setMessage('Show more');
+    const addResults = () => {
+        setResultsNum(resultsNum + 3);
+        if (resultsNum > 100) {
+            hideButton();
         }
     }
 
-    const showAllResults = () => {
-        props.showAllResults();
-    }
+    const [visibility, setVisibility] = React.useState(true);
 
-    const resetResults = () => {
-        props.resetResults();
+    const hideButton = () => {
+        setVisibility(false);
     }
 
     return (
         <NewsListWrapper>
             {props.loggedIn ? '' : <NewsListTitle>Search results</NewsListTitle>}
             <NewsList>
-                {props.articles.slice(0, props.articles.length).map((article) => {
+                {props.articles.slice(0, resultsNum).map((article) => {
+
+                    // ________________________________change nature of article date so 
+                    // ________________________________Date methods can be applied
+                    article.publishedAt = new Date();
+
+                    // ________________________________________format date for display
+                    const formatDate = (date) => {
+                        let day = date.getDate();
+                        let year = date.getFullYear();
+                        let month = labelMonth(date.getMonth());
+                        return `${month} ${day}, ${year}`;
+                    }
+
+                    // ____________________________________convert month number to string name
+                    const labelMonth = (num) => {
+                        return months[num - 1];
+                    }
+
                     return (
                         <NewsCard
                             key={props.articles.indexOf(article)}
-                            //to be replaced with article._id
                             savedNews={props.savedNews}
-                            // label={article.label}
-                            image={article.urlImage}
-                            date={article.publishedAt}
+                            label={props.label}
+                            image={article.urlToImage}
+                            date={formatDate(article.publishedAt)}
                             headline={article.title}
                             text={article.description}
                             source={article.source.name} />)
@@ -47,9 +59,10 @@ const NewsCardList = (props) => {
                 width={'288px'}
                 color={'#FFF'}
                 textColor={'#000'}
-                onClick={resultsClickHandler}
-                hoverColor={'#E8E8E8'}>
-                {message}
+                onClick={addResults}
+                hoverColor={'#E8E8E8'}
+                visible={visibility}>
+                Show more
             </NewsListButton>
         </ NewsListWrapper>
     )

@@ -16,6 +16,10 @@ const Header = (props) => {
         props.openPopupMenu();
     }
 
+    const signout = () => {
+        props.signout();
+    }
+
     return (
         <HeaderBar>
             <HeaderTitle color={props.color}>NewsExplorer</HeaderTitle>
@@ -24,7 +28,8 @@ const Header = (props) => {
                 openPopupForm={openPopupForm}
                 color={props.color}
                 openPopupMenu={openPopupMenu}
-                isPopupMenuOpen={props.isPopupMenuOpen} />
+                isPopupMenuOpen={props.isPopupMenuOpen}
+                signout={signout} />
         </HeaderBar>
     )
 }

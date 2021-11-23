@@ -68,6 +68,7 @@ text-align: center;
 color: ${props => props.textColor};
 border: none;
 transition: background .2s ease-in-out;
+visibility: ${props => props.visible ? 'visible' : 'hidden'};
 
 :hover {
 background: ${props => props.hoverColor};

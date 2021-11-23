@@ -33,7 +33,7 @@ class MainApi {
               body: JSON.stringify({ email, password })
           })
           .then(response => {
-              this._checkResponse(response)
+              return this._checkResponse(response)
           })
           .then((data) => {
               console.log(data);
@@ -60,7 +60,7 @@ class MainApi {
       // ____________________________________________________Check if response is valid
     _checkResponse = (response) => {
         if (response.ok) {
-          return response.json()
+          return response.json();
         }
         else {
           return Promise.reject(`Error: ${response.status}`)
@@ -70,7 +70,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-    baseUrl: 'localhost//:3000'
+    baseUrl: 'http://localhost:3000'
     //baseUrl: 'https://api.boydaround.students.nomoreparties.site'
 })
 

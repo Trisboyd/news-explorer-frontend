@@ -5,9 +5,13 @@ import menu from '../../images/nav-menu.png';
 import menuBlack from '../../images/nav-menu-black.png';
 import logoutWhite from '../../images/logoutWhite.png';
 import logoutBlack from '../../images/logout-black.png';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const Navigation = (props) => {
     
+    // User info imported by context
+    const currentUser = React.useContext(CurrentUserContext);
+
     // ________________________________determine location on web app
     const location = useLocation();
 
@@ -34,7 +38,7 @@ const Navigation = (props) => {
 
     const linkText = () => {
         if (props.loggedIn) {
-            return `Elise`
+            return currentUser.name
             //should be props.userName or userName with context
         }
         return 'Sign in'
@@ -48,6 +52,10 @@ const Navigation = (props) => {
         props.openPopupMenu();
     }
 
+    const signout = () => {
+        props.signout();
+    }
+
     return (
         <NavWrapper>
             <NavMenu
@@ -59,13 +67,13 @@ const Navigation = (props) => {
             <NavLink
                 color={props.color}
                 to='/'
-                currentPage={location.pathname === '/' && true} >
+                currentpage={location.pathname === '/' && true} >
                 Home
             </NavLink>
             {props.loggedIn && <NavLink
                 color={props.color}
                 to='/saved-news'
-                currentPage={location.pathname === '/saved-news' && true}>
+                currentpage={location.pathname === '/saved-news' && true}>
                 Saved Articles</NavLink>}
             <NavLink
                 onClick={openPopupForm}
@@ -75,6 +83,7 @@ const Navigation = (props) => {
                 {props.loggedIn &&
                     <NavLogout
                         image={location.pathname === '/saved-news' ? blackLogout : whiteLogout}
+                        onClick={signout}
                     />}
             </NavLink>
         </NavWrapper>
