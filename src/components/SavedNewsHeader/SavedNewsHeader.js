@@ -5,6 +5,10 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const SavedNewsHeader = (props) => {
 
+    // _________________________________________________keywords
+    const [keywords, setKeywords] = React.useState([]);
+
+    const [keysMessage, setKeysMessage] = React.useState('');
         
     // User info imported by context
     const currentUser = React.useContext(CurrentUserContext);
@@ -21,6 +25,34 @@ const SavedNewsHeader = (props) => {
         props.signout();
     }
 
+    const sortKeywords = () => {
+        const keys = props.savedArticles.map((article) => article.keyword)
+        const keyTerms = new Set(keys);
+        const keysArray = Array.from(keyTerms);
+        setKeywords(keysArray);
+    }
+
+    const filterKeysMessage = () => {
+        sortKeywords();
+        if (keywords.length === 3) {
+            setKeysMessage(`${keywords[0]}, ${keywords[1]}, and ${keywords[2]}.`)
+        }
+        else if (keywords.length === 2) {
+            setKeysMessage(`${keywords[0]} and ${keywords[1]}.`)
+        }
+        else if (keywords.length === 1) {
+            setKeysMessage(`${keywords[0]}.`)
+        }
+        else if (keywords.length > 3) {
+            setKeysMessage(`${keywords[0]}, ${keywords[1]}, and ${keywords.length - 2} others.`)
+        }
+        console.log(keysMessage);
+    }
+
+    React.useEffect(()=> {
+        filterKeysMessage();
+    }, []);
+
     return (
         <SavedHeaderWrapper>
             <Header
@@ -32,9 +64,9 @@ const SavedNewsHeader = (props) => {
                 color={props.color}
             />
             <SavedHeader>Saved Articles</SavedHeader>
-            <SavedMessage>{currentUser.name}, you have {props.number} saved <br /> articles</SavedMessage>
+            <SavedMessage>{currentUser.name}, you have {props.savedArticles.length} saved <br /> articles</SavedMessage>
             <SavedKeywords>By keywords:
-                <SavedKeywordsSpan> {props.keywords}</SavedKeywordsSpan>
+                <SavedKeywordsSpan> {keysMessage}</SavedKeywordsSpan>
             </SavedKeywords>
         </SavedHeaderWrapper>
     )

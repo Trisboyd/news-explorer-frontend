@@ -20,10 +20,15 @@ const NewsCardList = (props) => {
         setVisibility(false);
     }
 
+    // const saveArticle = () => {
+    //     props.saveArticle();
+    // }
+
     return (
         <NewsListWrapper>
             {props.loggedIn ? '' : <NewsListTitle>Search results</NewsListTitle>}
             <NewsList>
+
                 {props.articles.slice(0, resultsNum).map((article) => {
 
                     // ________________________________change nature of article date so 
@@ -45,14 +50,20 @@ const NewsCardList = (props) => {
 
                     return (
                         <NewsCard
+                            // __________________________________article info
                             key={props.articles.indexOf(article)}
-                            savedNews={props.savedNews}
-                            label={props.label}
+                            article={props.article}
+                            keyword={props.keyword}
                             image={article.urlToImage}
                             date={formatDate(article.publishedAt)}
                             headline={article.title}
                             text={article.description}
-                            source={article.source.name} />)
+                            source={article.source.name}
+                            link={article.url}
+                            // _______________________________settings props
+                            savedNews={props.savedNews}
+                            loggedIn={props.loggedIn}
+                            saveArticle={props.saveArticle} />)
                 })}
             </NewsList>
             <NewsListButton
