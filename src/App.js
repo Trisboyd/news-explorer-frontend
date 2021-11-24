@@ -18,8 +18,8 @@ import PopupWithForm from './components/PopupWithForm/PopupWithForm';
 import PopupMessage from './components/PopupMessage/PopupMessage';
 import PopupMenu from './components/PopupMenu/PopupMenu';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-// import Preloader from './components/Preloader/Preloader';
-// import NoResults from './components/NoResults/NoResults';
+import Preloader from './components/Preloader/Preloader';
+import NoResults from './components/NoResults/NoResults';
 
 // _______________________________________________constants
 // import articles from './utilities/articles';
@@ -76,9 +76,18 @@ function App() {
 
   // _______________________________________________________________________________________Articles
 
+   // _______________________________________________________state variables
   const [articles, setArticles] = React.useState([]);
 
-  const [label, setLabel] = React.useState('');
+  const [savedArticles, setSavedArticles] = React.useState([]);
+
+  const [keyword, setkeyword] = React.useState('');
+
+  const [showArticles, setShowArticles] = React.useState(false);
+
+  const [showLoader, setShowLoader] = React.useState(false);
+
+  const [showNone, setShowNone] = React.useState(false);
 
   // ________________________________________current date
   const curDate = new Date();
@@ -101,17 +110,44 @@ function App() {
   }
 
   // _______________________________________________get articles from newsAPi
-  const displayArticles = (input) => {
-    setLabel(input);
+  const searchArticles = (input) => {
+    setShowLoader(true);
+    setkeyword(input);
     newsApi.getArticles(
       input,
       formatDate(weekEarlier(curDate)),
       formatDate(curDate2))
       .then(res => {
-        setArticles([...articles, ...res.articles]);
-        console.log(res.articles.slice(0,3));
+        if (res.articles.length === 0) {
+          setShowNone(true); //__________ show 'no results'
+          setShowArticles(false); //_______ remove articles from display
+        }
+        else {
+          setShowNone(false); //_____remove 'no results' component
+          setShowArticles(true)
+          setArticles([...res.articles]);
+          console.log(res.articles.slice(0, 3));
+        }
       })
-      .catch(error => { console.log(error) });
+      .catch(error => console.log(error))
+      .finally(() => {
+        setShowLoader(false);
+      });
+  }
+
+  const saveArticle = (data) => {
+    console.log(data);
+    mainApi.saveArticle(token, data)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+  }
+
+  const getSavedArticles = () => {
+    mainApi.getArticles(token)
+    .then(response => {
+      console.log(response)
+      setSavedArticles([...savedArticles, ...response.articles])
+    })
   }
 
   // _________________________________________________________________________________________Authorization
@@ -185,8 +221,10 @@ function App() {
 
   React.useEffect(() => {
     retrieveUserInfo();
+    getSavedArticles();
   }, []);
 
+  // _________________________________________________________________________________COMPONENTS
 
   return (
     <>
@@ -200,15 +238,22 @@ function App() {
               isPopupMenuOpen={isPopupMenuOpen}
               color={'#FFF'} //___color of header based on route
               signout={signout}
-              handleSearch={displayArticles}
+              handleSearch={searchArticles}
             />
-            <NewsCardList
-              label={label}
-              savedNews={savedNews}
-              articles={articles}
-              resultsNumber={resultsNumber}
-              showAllResults={showAllResults}
-              resetResults={resetResults} />
+            {showLoader &&
+              <Preloader />}
+            {showArticles &&
+              <NewsCardList
+                loggedIn={loggedIn}
+                keyword={keyword}
+                savedNews={savedNews}
+                articles={articles}
+                resultsNumber={resultsNumber}
+                showAllResults={showAllResults}
+                resetResults={resetResults}
+                saveArticle={saveArticle} />}
+            {showNone &&
+              <NoResults />}
             <About />
           </ Route>
           <ProtectedRoute
@@ -217,6 +262,7 @@ function App() {
             component={<>
               <SavedNewsHeader
                 color={'#1A1B22'} //___color of header based on route
+                savedArticles={savedArticles}
                 openPopupForm={openPopupForm}
                 openPopupMenu={openPopupMenu}
                 isPopupMenuOpen={isPopupMenuOpen}
@@ -224,13 +270,11 @@ function App() {
                 signout={signout}
               />
               <SavedNews
-                articles={articles}
+                savedArticles={savedArticles}
                 savedNews={savedNews} />
             </>}>
           </ ProtectedRoute>
         </Switch>
-        {/* <Preloader /> */}
-        {/* <NoResults /> */}
         <Footer />
         <PopupWithForm
           isOpen={isPopupFormOpen}

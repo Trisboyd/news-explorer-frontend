@@ -116,7 +116,7 @@ const PopupWithForm = (props) => {
                     required>
                 </FormInput>
                 <FormErrorMessage></FormErrorMessage>
-                {formState === 1 ?
+                {formState === 1 &&
                     <>
                         <FormLabel>Username</FormLabel>
                         <FormInput
@@ -131,7 +131,7 @@ const PopupWithForm = (props) => {
                             onChange={handleChange}>
                         </FormInput>
                         <FormErrorMessage></FormErrorMessage>
-                    </> : ''}
+                    </>}
                 <MainButton
                     color={'#2F71E5'}
                     width={'360px'}

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { devices } from '../../utilities/constants';
 
 export const NewsWrap = styled.article`
     display: flex;
@@ -11,6 +12,15 @@ export const NewsWrap = styled.article`
 export const NewsImageContainer = styled.div`
     position: relative;
     width: 100%;
+    max-height: 282px;
+
+    @media ${devices.tablet} {
+    max-height: 150px;
+    }
+
+    @media ${devices.tablet} {
+    max-height: 196px;
+    }
 `
 export const NewsImageLabel = styled.div`
     position: absolute;
@@ -34,6 +44,7 @@ export const NewsImageLabel = styled.div`
 
 export const NewsImage = styled.img`
     width: 100%;
+    height: 100%;
     border-radius: 5% 5% 0 0;
 `
 

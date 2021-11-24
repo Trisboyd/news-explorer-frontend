@@ -9,6 +9,16 @@ import trash from '../../images/trash.png'
 
 const NewsCard = (props) => {
 
+    const articleData = {
+        keyword: props.keyword,
+        title: props.headline,
+        date: props.date,
+        text: props.text,
+        source: props.source,
+        image: props.image,
+        link: props.link
+    }
+
     const [bookmark, setBookmark] = React.useState(mark);
 
     const [isSaved, setIsSaved] = React.useState(false);
@@ -16,7 +26,8 @@ const NewsCard = (props) => {
     const [isShown, setIsShown] = React.useState(false);
 
     const clickMarkHandler = () => {
-        if (bookmark === mark) {
+        if (bookmark === mark && props.loggedIn) {
+            props.saveArticle(articleData)
             setBookmark(markBlue)
             setIsSaved(true);
         }
@@ -24,21 +35,20 @@ const NewsCard = (props) => {
             setBookmark(mark)
             setIsSaved(false)
         };
-        console.log(isSaved);
     }
 
     return (
         <>
             <NewsWrap>
                 <NewsImageContainer>
-                    <NewsImageLabel savedNews={props.savedNews}>{props.label}</NewsImageLabel>
+                    <NewsImageLabel savedNews={props.savedNews}>{props.keyword}</NewsImageLabel>
                     <NewsImage src={props.image} />
                     <NewsMarkMessageWrap>
                         <NewsMarkMessage
                             isShown={isShown}>Sign in to save articles</NewsMarkMessage>
                         <NewsMarkWrap>
                             <NewsMark
-                                onMouseEnter={() => setIsShown(true)}
+                                onMouseEnter={() => !props.loggedIn && setIsShown(true)}
                                 onMouseLeave={() => setIsShown(false)}
                                 src={props.savedNews ? trash : bookmark}
                                 onClick={clickMarkHandler}
