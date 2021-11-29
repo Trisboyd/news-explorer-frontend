@@ -37,6 +37,10 @@ const NewsCard = (props) => {
         };
     }
 
+    const removeArticle = () => {
+        props.removeArticle(props.article);
+    }
+
     return (
         <>
             <NewsWrap>
@@ -51,7 +55,7 @@ const NewsCard = (props) => {
                                 onMouseEnter={() => !props.loggedIn && setIsShown(true)}
                                 onMouseLeave={() => setIsShown(false)}
                                 src={props.savedNews ? trash : bookmark}
-                                onClick={clickMarkHandler}
+                                onClick={props.savedNews ? removeArticle : clickMarkHandler}
                                 isSaved={isSaved}
                                 isShown={isShown} />
                         </NewsMarkWrap>

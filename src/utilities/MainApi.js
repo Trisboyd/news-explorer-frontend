@@ -57,6 +57,7 @@ class MainApi {
       })
   }
 
+  // ________________________________________________collect articles
   getArticles = (token) => {
     return fetch(`${this._url}/articles`, {
       headers: {
@@ -68,7 +69,18 @@ class MainApi {
     })
   }
 
-  // _____________________________________________________save articles
+  // ___________________________________________________remove article
+  removeArticle = (token, articleId) => {
+    return fetch(`${this._url}/articles/${articleId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+    .then(response => this._checkResponse(response));
+  }
+
+  // _____________________________________________________save article
   saveArticle = (token, data) => {
     return fetch(`${this._url}/articles`, {
       method: 'POST',

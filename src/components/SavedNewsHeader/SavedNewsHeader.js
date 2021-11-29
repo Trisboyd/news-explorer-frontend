@@ -34,24 +34,26 @@ const SavedNewsHeader = (props) => {
 
     const filterKeysMessage = () => {
         sortKeywords();
+        let message =''
         if (keywords.length === 3) {
-            setKeysMessage(`${keywords[0]}, ${keywords[1]}, and ${keywords[2]}.`)
+            message = `${keywords[0]}, ${keywords[1]}, and ${keywords[2]}.`
         }
         else if (keywords.length === 2) {
-            setKeysMessage(`${keywords[0]} and ${keywords[1]}.`)
+            message = `${keywords[0]} and ${keywords[1]}.`
         }
         else if (keywords.length === 1) {
-            setKeysMessage(`${keywords[0]}.`)
+            message = `${keywords[0]}.`
         }
         else if (keywords.length > 3) {
-            setKeysMessage(`${keywords[0]}, ${keywords[1]}, and ${keywords.length - 2} others.`)
+            message = `${keywords[0]}, ${keywords[1]}, and ${keywords.length - 2} others.`
         }
-        console.log(keysMessage);
+        setKeysMessage(message);
     }
 
     React.useEffect(()=> {
+        console.log(keysMessage);
         filterKeysMessage();
-    }, []);
+    }, [props.savedArticles]);
 
     return (
         <SavedHeaderWrapper>

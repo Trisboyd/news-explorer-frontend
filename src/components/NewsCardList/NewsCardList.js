@@ -52,7 +52,7 @@ const NewsCardList = (props) => {
                         <NewsCard
                             // __________________________________article info
                             key={props.articles.indexOf(article)}
-                            article={props.article}
+                            article={article}
                             keyword={props.keyword}
                             image={article.urlToImage}
                             date={formatDate(article.publishedAt)}

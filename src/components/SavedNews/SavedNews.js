@@ -21,7 +21,9 @@ const SavedNews = (props) => {
                             headline={title}
                             text={text}
                             source={source}
-                            link={link} />)
+                            link={link}
+                            article={article}
+                            removeArticle={props.removeArticle} />)
                 })}
             </NewsList>
         </NewsListWrapper>
