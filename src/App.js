@@ -251,7 +251,7 @@ function App() {
 
   React.useEffect(() => {
     retrieveUserInfo(); //_________________ get user info
-  }, []);
+  }, [handleLogin, signout]);
 
   // ________________________________________________________________________________________________COMPONENTS
 
@@ -292,6 +292,8 @@ function App() {
               <SavedNewsHeader
                 color={'#1A1B22'} //___color of header based on route
                 savedArticles={savedArticles}
+                saveArticle={saveArticle}
+                removeArticle={removeArticle}
                 openPopupForm={openPopupForm}
                 openPopupMenu={openPopupMenu}
                 isPopupMenuOpen={isPopupMenuOpen}

@@ -53,7 +53,7 @@ const SavedNewsHeader = (props) => {
     React.useEffect(()=> {
         console.log(keysMessage);
         filterKeysMessage();
-    }, [props.savedArticles]);
+    }, [props.saveArticle, props.removeArticle]);
 
     return (
         <SavedHeaderWrapper>
@@ -66,7 +66,10 @@ const SavedNewsHeader = (props) => {
                 color={props.color}
             />
             <SavedHeader>Saved Articles</SavedHeader>
-            <SavedMessage>{currentUser.name}, you have {props.savedArticles.length} saved <br /> articles</SavedMessage>
+            <SavedMessage>
+                {currentUser.name}, you have {props.savedArticles.length} saved <br /> article
+                {props.savedArticles.length > 1 ? 's' : ''}
+                </SavedMessage>
             <SavedKeywords>By keywords:
                 <SavedKeywordsSpan> {keysMessage}</SavedKeywordsSpan>
             </SavedKeywords>

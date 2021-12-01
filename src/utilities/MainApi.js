@@ -116,8 +116,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'http://localhost:3000'
-  //baseUrl: 'https://api.boydaround.students.nomoreparties.site'
+  // baseUrl: 'http://localhost:3000'
+  baseUrl: 'https://api-boyd-news-explorer.herokuapp.com'
 })
 
 export default mainApi;

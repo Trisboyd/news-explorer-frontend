@@ -12,14 +12,15 @@ export const NewsWrap = styled.article`
 export const NewsImageContainer = styled.div`
     position: relative;
     width: 100%;
-    max-height: 282px;
+    height: 272px;
+    align-items: center;
 
-    @media ${devices.tablet} {
-    max-height: 150px;
+    @media ${devices.laptop} {
+    height: 150px;
     }
 
-    @media ${devices.tablet} {
-    max-height: 196px;
+    @media ${devices.mobileL} {
+    height: 196px;
     }
 `
 export const NewsImageLabel = styled.div`
@@ -46,6 +47,8 @@ export const NewsImage = styled.img`
     width: 100%;
     height: 100%;
     border-radius: 5% 5% 0 0;
+    object-fit: cover;
+
 `
 
 export const NewsMarkMessageWrap = styled.div`
