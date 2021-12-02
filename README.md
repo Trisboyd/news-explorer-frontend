@@ -1,6 +1,9 @@
 # News Explorer (Frontend)
 
 ## general
+This website can be found at:
+https://wonderful-yonath-9a8bb2.netlify.app
+
 This code comprises the front end of the news explorer app. The backend utilizing express can be found at 
 https://github.com/Trisboyd/news-explorer-api
 and is hosted at 
