@@ -51,7 +51,6 @@ const SavedNewsHeader = (props) => {
     }
 
     React.useEffect(()=> {
-        console.log(keysMessage);
         filterKeysMessage();
     }, [props.saveArticle, props.removeArticle]);
 

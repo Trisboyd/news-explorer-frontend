@@ -27,7 +27,7 @@ export const HeaderTitle = styled.p`
     line-height: 1.2;
     display: flex;
     align-items: center;
-    color: ${props => props.color};
+    color: ${props => props.theme.color};
     position: relative;
 
     @media ${devices.mobileL} {

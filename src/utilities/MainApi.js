@@ -42,7 +42,6 @@ class MainApi {
           return data;
         }
       })
-      .catch(error => console.log(error));
   }
 
   // _____________________________________________________Get user info

@@ -1,28 +1,25 @@
 // ___________________________________________________________Dependencies
 import React from 'react';
 import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
-import { CurrentUserContext } from './contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 // _________________________________________________________________API classes
-import newsApi from './utilities/NewsApi';
-import mainApi from './utilities/MainApi';
+import newsApi from '../../utilities/NewsApi';
+import mainApi from '../../utilities/MainApi';
 
 // _______________________________________________________________Components
-import Main from './components/Main/Main';
-import SavedNewsHeader from './components/SavedNewsHeader/SavedNewsHeader';
-import SavedNews from './components/SavedNews/SavedNews';
-import About from '../src/components/About/About';
-import NewsCardList from './components/NewsCardList/NewsCardList';
-import Footer from './components/Footer/Footer';
-import PopupWithForm from './components/PopupWithForm/PopupWithForm';
-import PopupMessage from './components/PopupMessage/PopupMessage';
-import PopupMenu from './components/PopupMenu/PopupMenu';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import Preloader from './components/Preloader/Preloader';
-import NoResults from './components/NoResults/NoResults';
-
-// _______________________________________________constants
-// import articles from './utilities/articles';
+import Main from '../Main/Main';
+import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import SavedNews from '../SavedNews/SavedNews';
+import About from '../About/About';
+import NewsCardList from '../NewsCardList/NewsCardList';
+import Footer from '../Footer/Footer';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import PopupMessage from '../PopupMessage/PopupMessage';
+import PopupMenu from '../PopupMenu/PopupMenu';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Preloader from '../Preloader/Preloader';
+import NoResults from '../NoResults/NoResults';
 
 function App() {
 
@@ -74,17 +71,17 @@ function App() {
     showSavedNews();
   }, [location]);
 
-    // ____________________________________________________________________________________USER INFO
+  // ____________________________________________________________________________________USER INFO
 
-    const [currentUser, setCurrentUser] = React.useState({
-      name: '',
-      email: '',
-      id: ''
-    });
-  
-    const retrieveUserInfo = () => {
-      mainApi.getCurrentUser(token).then(response => {
-        if (response) {
+  const [currentUser, setCurrentUser] = React.useState({
+    name: '',
+    email: '',
+    id: ''
+  });
+
+  const retrieveUserInfo = () => {
+    mainApi.getCurrentUser(token).then(response => {
+      if (response) {
         setLoggedIn(true);
         setCurrentUser({
           name: response.user.name,
@@ -93,8 +90,9 @@ function App() {
         })
       }
       else console.log('Log in error')
-      })
-    }
+    })
+      .catch(error => console.log(error));
+  }
 
   // _________________________________________________________________________________________Authorization
 
@@ -147,102 +145,103 @@ function App() {
     setLoggedIn(false);
   }
 
-    // _______________________________________________________________________________________Articles
+  // _______________________________________________________________________________________Articles
 
-   // _______________________________________________________state variables
-   const [articles, setArticles] = React.useState([]);
+  // _______________________________________________________state variables
+  const [articles, setArticles] = React.useState([]);
 
-   const [savedArticles, setSavedArticles] = React.useState([]);
- 
-   const [keyword, setkeyword] = React.useState('');
- 
-   const [showArticles, setShowArticles] = React.useState(false);
- 
-   const [showLoader, setShowLoader] = React.useState(false);
- 
-   const [showNone, setShowNone] = React.useState(false);
- 
-   // ________________________________________current date
-   const curDate = new Date();
-   const curDate2 = new Date();
- 
-   // ________________________________________format date to be read by newsApi
-   const formatDate = (date) => {
-     let day = date.getDate();
-     let year = date.getFullYear();
-     let month = date.getMonth() + 1;
-     return `${year}-${month}-${day}`;
-   }
- 
-   // ___________________________________________calculate one week from current date
-   const weekEarlier = (date) => {
-     let pastDate = date.getDate() - 7;
-     let oldDate = date;
-     oldDate.setDate(pastDate);
-     return oldDate
-   }
- 
-   // _______________________________________________get articles from newsAPi
-   const searchArticles = (input) => {
-     setShowLoader(true);
-     setkeyword(input);
-     newsApi.getArticles(
-       input,
-       formatDate(weekEarlier(curDate)),
-       formatDate(curDate2))
-       .then(res => {
-         if (res.articles.length === 0) {
-           setShowNone(true); //__________ show 'no results'
-           setShowArticles(false); //_______ remove articles from display
-         }
-         else {
-           setShowNone(false); //_____remove 'no results' component
-           setShowArticles(true)
-           setArticles([...res.articles]);
-           console.log(res.articles.slice(0, 3));
-         }
-       })
-       .catch(error => console.log(error))
-       .finally(() => {
-         setShowLoader(false);
-       });
-   }
- 
-   // ____________________________________________________save article for saved page
-   const saveArticle = (data) => {
-     console.log(data);
-     mainApi.saveArticle(token, data)
-     .then(response => console.log(response))
-     .catch(error => console.log(error))
-   }
- 
-   // ______________________________________________________________API call for removing articles
-   const removeArticle = (data) => {
-     console.log(currentUser.id, data.owner, data._id)
-     if (currentUser.id === data.owner) {
-     mainApi.removeArticle(token, data._id)
-     .then(response => {
-       setSavedArticles(savedArticles.filter((articleItem) => articleItem._id !== data._id))
-       console.log(response)
-     })
-     .catch(error => console.log(error))
-   }
-   else console.log('Only article owners may remove their own articles')
+  const [savedArticles, setSavedArticles] = React.useState([]);
+
+  const [keyword, setkeyword] = React.useState('');
+
+  const [showArticles, setShowArticles] = React.useState(false);
+
+  const [showLoader, setShowLoader] = React.useState(false);
+
+  const [showNone, setShowNone] = React.useState(false);
+
+  // ________________________________________current date
+  const curDate = new Date();
+  const curDate2 = new Date();
+
+  // ________________________________________format date to be read by newsApi
+  const formatDate = (date) => {
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    return `${year}-${month}-${day}`;
   }
- 
-   // ________________________________________________________________________render saved articles
+
+  // ___________________________________________calculate one week from current date
+  const weekEarlier = (date) => {
+    let pastDate = date.getDate() - 7;
+    let oldDate = date;
+    oldDate.setDate(pastDate);
+    return oldDate
+  }
+
+  // _______________________________________________get articles from newsAPi
+  const searchArticles = (input) => {
+    setShowLoader(true);
+    setkeyword(input);
+    newsApi.getArticles(
+      input,
+      formatDate(weekEarlier(curDate)),
+      formatDate(curDate2))
+      .then(res => {
+        if (res.articles.length === 0) {
+          setShowNone(true); //__________ show 'no results'
+          setShowArticles(false); //_______ remove articles from display
+        }
+        else {
+          setShowNone(false); //_____remove 'no results' component
+          setShowArticles(true)
+          setArticles([...res.articles]);
+          console.log(res.articles.slice(0, 3));
+        }
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        setShowLoader(false);
+      });
+  }
+
+  // ____________________________________________________save article for saved page
+  const saveArticle = (data) => {
+    console.log(data);
+    mainApi.saveArticle(token, data)
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
+  }
+
+  // ______________________________________________________________API call for removing articles
+  const removeArticle = (data) => {
+    console.log(currentUser.id, data.owner, data._id)
+    if (currentUser.id === data.owner) {
+      mainApi.removeArticle(token, data._id)
+        .then(response => {
+          setSavedArticles(savedArticles.filter((articleItem) => articleItem._id !== data._id))
+          console.log(response)
+        })
+        .catch(error => console.log(error))
+    }
+    else console.log('Only article owners may remove their own articles')
+  }
+
+  // ________________________________________________________________________render saved articles
   //  _________________________________________filter articles before rendering
-   const filterArticles = (old, recent) => {
+  const filterArticles = (old, recent) => {
     const ids = old.map((article) => article._id)
     return recent.filter((article) => ids.indexOf(article._id) === -1)
-   }
+  }
 
-   const getSavedArticles = () => {
-     mainApi.getArticles(token)
-     .then(response => {
-       setSavedArticles([...savedArticles, ...filterArticles(savedArticles, response.articles)]);
-     })
-   }
+  const getSavedArticles = () => {
+    mainApi.getArticles(token)
+      .then(response => {
+        setSavedArticles([...savedArticles, ...filterArticles(savedArticles, response.articles)]);
+      })
+      .catch(error => console.log(error));
+  }
 
   // _______________________________________________________________________________reload saved articles on actions
   React.useEffect(() => {
@@ -260,30 +259,30 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
           <Route exact path='/'>
-            <Main
-              loggedIn={loggedIn}
-              openPopupForm={openPopupForm}
-              openPopupMenu={openPopupMenu}
-              isPopupMenuOpen={isPopupMenuOpen}
-              color={'#FFF'} //___color of header based on route
-              signout={signout}
-              handleSearch={searchArticles}
-            />
-            {showLoader &&
-              <Preloader />}
-            {showArticles &&
-              <NewsCardList
+              <Main
                 loggedIn={loggedIn}
-                keyword={keyword}
-                savedNews={savedNews}
-                articles={articles}
-                resultsNumber={resultsNumber}
-                showAllResults={showAllResults}
-                resetResults={resetResults}
-                saveArticle={saveArticle} />}
-            {showNone &&
-              <NoResults />}
-            <About />
+                openPopupForm={openPopupForm}
+                openPopupMenu={openPopupMenu}
+                isPopupMenuOpen={isPopupMenuOpen}
+                color={'#FFF'} //___color of header based on route
+                signout={signout}
+                handleSearch={searchArticles}
+              />
+              {showLoader &&
+                <Preloader />}
+              {showArticles &&
+                <NewsCardList
+                  loggedIn={loggedIn}
+                  keyword={keyword}
+                  savedNews={savedNews}
+                  articles={articles}
+                  resultsNumber={resultsNumber}
+                  showAllResults={showAllResults}
+                  resetResults={resetResults}
+                  saveArticle={saveArticle} />}
+              {showNone &&
+                <NoResults />}
+              <About />
           </ Route>
           <ProtectedRoute
             loggedIn={loggedIn}

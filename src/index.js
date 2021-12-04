@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App/App';
 import FontStyles from './components/Styles/FontStyles';
 import GlobalStyle from './components/Styles/GlobalStyle';
 import { Normalize } from 'styled-normalize';

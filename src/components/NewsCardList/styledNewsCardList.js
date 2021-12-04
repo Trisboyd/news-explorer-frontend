@@ -17,15 +17,16 @@ padding-bottom: 24px;
 export const NewsList = styled.div`
 max-width: 85.6%;
 display: grid;
-grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+grid-template-columns: repeat(3, minmax(224px, 1fr));
 grid-template-rows: repeat(auto-fit, minmax(440px, 576px));
 grid-row-gap: 16px;
 grid-column-gap: 40px;
 margin: 0 auto;
 
 @media ${devices.tablet} {
-    max-width: 95vw;
-    grid-column-gap: 8px;
+grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+max-width: 95vw;
+grid-column-gap: 8px;
 }
 `
 export const NewsListTitle = styled.h2`
