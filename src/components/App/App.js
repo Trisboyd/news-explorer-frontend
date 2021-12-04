@@ -174,8 +174,8 @@ function App() {
 
   // ___________________________________________calculate one week from current date
   const weekEarlier = (date) => {
-    let pastDate = date.getDate() - 7;
-    let oldDate = date;
+    const pastDate = date.getDate() - 7;
+    const oldDate = date;
     oldDate.setDate(pastDate);
     return oldDate
   }
