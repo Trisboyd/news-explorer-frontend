@@ -166,9 +166,9 @@ function App() {
 
   // ________________________________________format date to be read by newsApi
   const formatDate = (date) => {
-    let day = date.getDate();
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
     return `${year}-${month}-${day}`;
   }
 
@@ -255,7 +255,6 @@ function App() {
   // ________________________________________________________________________________________________COMPONENTS
 
   return (
-    <>
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
           <Route exact path='/'>
@@ -321,7 +320,6 @@ function App() {
           closePopupMenu={closeAllPopups}
           openPopupForm={openPopupForm} />
       </CurrentUserContext.Provider>
-    </>
   );
 }
 
