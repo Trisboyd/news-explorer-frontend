@@ -91,7 +91,10 @@ function App() {
       }
       else console.log('Log in error')
     })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error)
+        setCurrentUser({});
+      });
   }
 
   // _________________________________________________________________________________________Authorization
@@ -132,7 +135,6 @@ function App() {
         }
         if (response.token) {
           setLoggedIn(true);
-          retrieveUserInfo();
         }
       })
       .catch(error => console.log(error));
@@ -144,6 +146,11 @@ function App() {
     localStorage.removeItem('token');
     setLoggedIn(false);
   }
+
+  // _________________________________ collect user info whenever these functions are called
+    React.useEffect(() => {
+    retrieveUserInfo();
+  }, [loggedIn]);
 
   // _______________________________________________________________________________________Articles
 
@@ -243,14 +250,10 @@ function App() {
       .catch(error => console.log(error));
   }
 
-  // _______________________________________________________________________________reload saved articles on actions
+  // ___________________________________________________reload saved articles on actions
   React.useEffect(() => {
-    getSavedArticles(); // ____________ get saved articles
-  }, [location]);
-
-  React.useEffect(() => {
-    retrieveUserInfo(); //_________________ get user info
-  }, [handleLogin, signout]);
+    getSavedArticles();
+  }, [location.pathname]);
 
   // ________________________________________________________________________________________________COMPONENTS
 

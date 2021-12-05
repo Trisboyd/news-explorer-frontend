@@ -59,21 +59,15 @@ const PopupWithForm = (props) => {
     // ______________________________________________________________________login function
     const handleLogin = (event) => {
         event.preventDefault();
-        if (inputs.email && inputs.password) {
-            props.handleLogin(inputs);
-            closePopup();
-        }
-        else console.log('All inputs required');
+        props.handleLogin(inputs);
+        closePopup();
     }
 
     // ___________________________________________________________________________register function
     const handleRegister = (event) => {
         event.preventDefault();
-        if (inputs.email && inputs.password && inputs.name) {
-            props.handleRegister(inputs);
-            closePopup();
-        }
-        else console.log('All inputs required');
+        props.handleRegister(inputs);
+        closePopup();
     }
 
     return (

@@ -34,6 +34,12 @@ const Navigation = (props) => {
         props.signout();
     }
 
+    const handleSignInClick = () => {
+        if (!props.loggedIn) {
+            openPopupForm();
+        }
+    };
+
     return (
         <ThemeProvider theme={location === 'saved-news' ? savedTheme : mainTheme}>
             <NavWrapper>
@@ -55,7 +61,7 @@ const Navigation = (props) => {
                     active={location === 'saved-news'}>
                     Saved Articles</NavLink>}
                 <NavLink
-                    onClick={openPopupForm}
+                    onClick={handleSignInClick}
                     color={props.color}
                     to='#'>
                     {linkText()}
