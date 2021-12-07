@@ -129,7 +129,7 @@ align-items: center;
 text-align: center;
 color: ${props => props.textColor};
 border: ${props => props.border};
-outline: 0;
+outline: none;
 transition: background .2s ease-in-out;
 
 :hover {

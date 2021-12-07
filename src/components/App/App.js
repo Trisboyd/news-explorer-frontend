@@ -55,6 +55,7 @@ function App() {
   // _______________________________________________________popup functions
   const openPopupForm = () => {
     setIsPopupFormOpen(true);
+    setEmailMessage('');
   }
 
   const openPopupMenu = () => {
@@ -97,12 +98,11 @@ function App() {
       });
   }
 
-  // _________________________________________________________________________________________Authorization
+  // _________________________________________________________________________________________AUTHORIZATION
 
   // _______________________________________________state variables for loggedin and registration 
   const [loggedIn, setLoggedIn] = React.useState(false);
-
-  const [isRegistered, setIsRegistered] = React.useState(false);
+  const [emailMessage, setEmailMessage] = React.useState('');
 
   // ____________________________________________token variable
   const token = localStorage.getItem('token');
@@ -116,13 +116,15 @@ function App() {
       .then((response) => {
         if (response) {
           console.log(response);
-          setIsRegistered(true);
+          closeAllPopups();
           setIsPopupMessageOpen(true);
         }
       })
       .catch(error => {
+        error.status === 409 && 
+        console.log(error.status)
+        setEmailMessage('This email is not available');
         console.log(error);
-        setIsRegistered(false);
       })
   }
 
@@ -135,6 +137,7 @@ function App() {
         }
         if (response.token) {
           setLoggedIn(true);
+          closeAllPopups();
         }
       })
       .catch(error => console.log(error));
@@ -152,7 +155,7 @@ function App() {
     retrieveUserInfo();
   }, [loggedIn]);
 
-  // _______________________________________________________________________________________Articles
+  // _______________________________________________________________________________________ARTICLES
 
   // _______________________________________________________state variables
   const [articles, setArticles] = React.useState([]);
@@ -313,7 +316,8 @@ function App() {
           isOpen={isPopupFormOpen}
           closePopup={closeAllPopups}
           handleLogin={handleLogin}
-          handleRegister={handleRegister} />
+          handleRegister={handleRegister}
+          emailMessage={emailMessage} />
         <PopupMessage
           isOpen={isPopupMessageOpen}
           closePopup={closeAllPopups}

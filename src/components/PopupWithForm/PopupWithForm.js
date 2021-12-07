@@ -6,10 +6,14 @@ import {
 
 const PopupWithForm = (props) => {
 
-    // ___________________________________________________________________________________Form Type Functions
+    // ________________________________Ref
+    const formRef = React.useRef();
+
+    // __________________________________________________________________________________________________SIGNIN VS SIGNUP
     //_________form state for determining which form should be shown (sign in or sign up)
     // ____________________________________________________0 = signin, 1 = signup
     const [formState, setFormState] = React.useState(0);
+    const [isValid, setIsValid] = React.useState('false');
 
     const formTitle = ['Sign in', 'Sign up'];
 
@@ -24,57 +28,85 @@ const PopupWithForm = (props) => {
         return formTitle.filter((title) => title !== formTitle[formState]);
     }
 
-    // ________________________________________________________________________Inputs
+    // _____________________________________________________________________________________________INPUTS AND VALIDATION
     const [inputs, setInputs] = React.useState({
         email: '',
         password: '',
         name: ''
     })
 
-    // ___________________________________________________________________change inputs based on typing
-    const handleChange = ({ target }) => {
-        const { name, value } = target;
+    // ______________________________ reset inputs everytime popup is opened
+    React.useEffect(() => {
+        resetInputs();
+    }, [props.isOpen]);
+
+    // _____________________________________update submit button based on validity of form inputs
+    const checkFormValidity = (event) => {
+        setIsValid(formRef.current.checkValidity());
+    }
+
+    // ______________________________________________________ Validation messages
+    const [errorMessages, setErrorMessages] = React.useState(
+        { email: '', password: '', name: '' }
+    );
+
+    const updateErrorMessages = (event) => {
+        const { name, validationMessage } = event.target;
+        setErrorMessages({
+            ...errorMessages,
+            [name]: validationMessage
+        })
+    }
+
+    // _______________________________________________________change inputs and error messages based on user input
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        errorMessages[name] && updateErrorMessages(event);
         setInputs({
             ...inputs,
             [name]: value
         });
     };
 
-    // _______________________________________________________________________reset inputs
+    // ______________________________________________________reset inputs
     const resetInputs = () => {
         setInputs({
             email: '',
             password: '',
             name: ''
         })
+        setErrorMessages({
+            email: '',
+            password: '',
+            name: ''
+        })
     }
 
-    // _________________________________________________________________________close popoup
-
+    // _________________________________________________________________________POPUP BEHAVIOR, LOGIN, REGISTER
+    // _________________________________________ close popup
     const closePopup = () => {
-        resetInputs();
         props.closePopup();
     }
 
-    // ______________________________________________________________________login function
+    // ________________________________________________________login function
     const handleLogin = (event) => {
         event.preventDefault();
         props.handleLogin(inputs);
-        closePopup();
     }
 
-    // ___________________________________________________________________________register function
+    // _____________________________________________________register function
     const handleRegister = (event) => {
         event.preventDefault();
         props.handleRegister(inputs);
-        closePopup();
     }
 
     return (
         <Overlay isOpen={props.isOpen}>
-            {/* <PopupContainer> */}
             <PopupForm
-                onSubmit={formState === 0 ? handleLogin : handleRegister}>
+                onSubmit={formState === 0 ? handleLogin : handleRegister}
+                ref={formRef}
+                onChange={checkFormValidity}
+                novalidate>
                 <PopupExit
                     onClick={closePopup}
                     height={'40px'}
@@ -95,21 +127,24 @@ const PopupWithForm = (props) => {
                     value={inputs.email}
                     placeholder='Enter email'
                     required
-                    onChange={handleChange}></FormInput>
-                <FormErrorMessage></FormErrorMessage>
+                    onChange={handleChange}
+                    onBlur={updateErrorMessages}>
+                </FormInput>
+                <FormErrorMessage>{errorMessages.email}</FormErrorMessage>
                 <FormLabel>Password</FormLabel>
                 <FormInput
-                    type='text'
+                    type='password'
                     min='2'
                     max='40'
                     id='password'
                     name='password'
                     value={inputs.password}
                     placeholder='Enter password'
+                    required
                     onChange={handleChange}
-                    required>
+                    onBlur={updateErrorMessages}>
                 </FormInput>
-                <FormErrorMessage></FormErrorMessage>
+                <FormErrorMessage>{errorMessages.password}</FormErrorMessage>
                 {formState === 1 &&
                     <>
                         <FormLabel>Username</FormLabel>
@@ -122,17 +157,20 @@ const PopupWithForm = (props) => {
                             value={inputs.name}
                             placeholder='Enter your username'
                             required
-                            onChange={handleChange}>
+                            onChange={handleChange}
+                            onBlur={updateErrorMessages}>
                         </FormInput>
-                        <FormErrorMessage></FormErrorMessage>
+                        <FormErrorMessage>{errorMessages.name}</FormErrorMessage>
                     </>}
+                <FormErrorMessage>{props.emailMessage}</FormErrorMessage>
                 <MainButton
-                    color={'#2F71E5'}
+                    color={!isValid ? '#E6E8EB' : '#2F71E5'}
                     width={'360px'}
                     mobileWidth={'90%'}
                     height={'64px'}
                     position={'relative'}
-                    textColor={'#FFF'}>
+                    textColor={'#FFF'}
+                    disabled={!isValid}>
                     {formTitle[formState]}
                 </MainButton>
                 <FormSwitch>or
@@ -142,7 +180,6 @@ const PopupWithForm = (props) => {
                     </FormSwitchSpan>
                 </FormSwitch>
             </PopupForm>
-            {/* </PopupContainer> */}
         </Overlay>
     )
 }
