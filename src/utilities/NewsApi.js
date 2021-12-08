@@ -6,7 +6,7 @@ class NewsApi {
     }
 
     getArticles(q, from, to) {
-        return fetch(`${this._url}q=${q}&from=${from}&to=${to}&pageSize=100&apiKey=${this._key}`, {
+        return fetch(`${this._url}qInTitle=${q}&from=${from}&to=${to}&pageSize=100&apiKey=${this._key}`, {
             headers: {
                 // "Content-Type": "application/json"
             }
@@ -30,7 +30,7 @@ class NewsApi {
 
 
 const newsApi = new NewsApi({
-    baseUrl: "nomoreparties.co/news/v2/everything?",
+    baseUrl: "https://nomoreparties.co/news/v2/everything?",
     apiKey: "496286d2299947289df49c01001af364",
 })
 
