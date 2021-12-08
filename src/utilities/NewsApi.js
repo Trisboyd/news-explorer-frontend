@@ -30,7 +30,7 @@ class NewsApi {
 
 
 const newsApi = new NewsApi({
-    baseUrl: "http://newsapi.org/v2/everything?",
+    baseUrl: "https://newsapi.org/v2/everything?",
     apiKey: "496286d2299947289df49c01001af364",
 })
 
