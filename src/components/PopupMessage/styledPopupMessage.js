@@ -24,7 +24,7 @@ export const PopupMessageTitle = styled.p`
     color: #000000;
     margin: 43px 0 14px 36px;
 `
-//should this be a LINK or just p that opens up a different popup?
+//should this be a LINK or just p that opens up a different popup
 export const PopupSigninLink = styled.p`
     font-size: 18px;
     line-height: 22px;

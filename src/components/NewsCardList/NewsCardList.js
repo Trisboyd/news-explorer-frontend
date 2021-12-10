@@ -20,13 +20,9 @@ const NewsCardList = (props) => {
         setVisibility(false);
     }
 
-    // const saveArticle = () => {
-    //     props.saveArticle();
-    // }
-
     return (
         <NewsListWrapper>
-            {props.loggedIn ? '' : <NewsListTitle>Search results</NewsListTitle>}
+            <NewsListTitle>Search results</NewsListTitle>
             <NewsList>
 
                 {props.articles.slice(0, resultsNum).map((article) => {

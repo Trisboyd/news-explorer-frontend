@@ -84,7 +84,8 @@ const PopupWithForm = (props) => {
 
     // _________________________________________________________________________POPUP BEHAVIOR, LOGIN, REGISTER
     // _________________________________________ close popup
-    const closePopup = () => {
+    const closePopup = (event) => {
+        event.preventDefault();
         props.closePopup();
     }
 

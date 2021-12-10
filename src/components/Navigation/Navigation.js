@@ -52,7 +52,7 @@ const Navigation = (props) => {
                 <NavLink
                     color={props.color}
                     to='/'
-                    active = {location === ''}>
+                    active={location === ''}>
                     Home
                 </NavLink>
                 {props.loggedIn && <NavLink
