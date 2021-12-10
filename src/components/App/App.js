@@ -30,28 +30,6 @@ function App() {
 
   const [isPopupMenuOpen, setIsPopupMenuOpen] = React.useState(false);
 
-  const [resultsNumber, setResultsNumber] = React.useState(3);
-
-  const [savedNews, setSavedNews] = React.useState(false);
-
-  const location = useLocation();
-
-  const showSavedNews = () => {
-    if (location.pathname === '/saved-news') {
-      setSavedNews(true);
-    }
-    else setSavedNews(false);
-  }
-
-  // _______________________________________shifts # results shown from article search
-  const showAllResults = () => {
-    setResultsNumber();
-  }
-
-  const resetResults = () => {
-    setResultsNumber(3);
-  }
-
   // _______________________________________________________popup functions
   const openPopupForm = () => {
     setIsPopupFormOpen(true);
@@ -67,10 +45,6 @@ function App() {
     setIsPopupMessageOpen(false);
     setIsPopupMenuOpen(false);
   }
-
-  React.useEffect(() => {
-    showSavedNews();
-  }, [location]);
 
   // ____________________________________________________________________________________USER INFO
 
@@ -170,6 +144,28 @@ function App() {
 
   const [showNone, setShowNone] = React.useState(false);
 
+  const [resultsNumber, setResultsNumber] = React.useState(3);
+
+  const [savedNews, setSavedNews] = React.useState(false);
+
+  const location = useLocation();
+
+  const showSavedNews = () => {
+    if (location.pathname === '/saved-news') {
+      setSavedNews(true);
+    }
+    else setSavedNews(false);
+  }
+
+  // _______________________________________shifts # results shown from article search
+  const showAllResults = () => {
+    setResultsNumber();
+  }
+
+  const resetResults = () => {
+    setResultsNumber(3);
+  }
+
   // ________________________________________current date
   const curDate = new Date();
   const curDate2 = new Date();
@@ -257,6 +253,10 @@ function App() {
   React.useEffect(() => {
     getSavedArticles();
   }, [location.pathname]);
+
+  React.useEffect(() => {
+    showSavedNews();
+  }, [location]);
 
   // ________________________________________________________________________________________________COMPONENTS
 
