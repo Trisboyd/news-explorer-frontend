@@ -1,13 +1,19 @@
 import React from 'react';
 import { NewsList, NewsListWrapper } from '../NewsCardList/styledNewsCardList';
 import NewsCard from '../NewsCard/NewsCard';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const SavedNews = (props) => {
+
+    // ______________________________________________________User info imported by context
+    const currentUser = React.useContext(CurrentUserContext);
+
+    const userArticles = props.savedArticles.filter((article) => currentUser.id === article.owner);
 
     return (
         <NewsListWrapper>
             <NewsList>
-                {props.savedArticles.map((article) => {
+                {userArticles.map((article) => {
 
                     const { _id, keyword, title, text, date, source, link, image } = article;
 

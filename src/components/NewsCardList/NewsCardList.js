@@ -20,6 +20,10 @@ const NewsCardList = (props) => {
         setVisibility(false);
     }
 
+    const openPopupForm = () => {
+        props.openPopupForm();
+    }
+
     return (
         <NewsListWrapper>
             <NewsListTitle>Search results</NewsListTitle>
@@ -59,7 +63,8 @@ const NewsCardList = (props) => {
                             // _______________________________settings props
                             savedNews={props.savedNews}
                             loggedIn={props.loggedIn}
-                            saveArticle={props.saveArticle} />)
+                            saveArticle={props.saveArticle}
+                            openPopupForm={openPopupForm} />)
                 })}
             </NewsList>
             <NewsListButton

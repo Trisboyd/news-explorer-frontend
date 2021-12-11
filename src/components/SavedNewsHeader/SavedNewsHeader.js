@@ -10,8 +10,10 @@ const SavedNewsHeader = (props) => {
 
     const [keysMessage, setKeysMessage] = React.useState('');
         
-    // User info imported by context
+    // __________________________________________________User info imported by context
     const currentUser = React.useContext(CurrentUserContext);
+
+    const userArticles = props.savedArticles.filter((article) => currentUser.id === article.owner);
 
     const openPopupForm = () => {
         props.openPopupForm();
@@ -26,7 +28,7 @@ const SavedNewsHeader = (props) => {
     }
 
     const sortKeywords = () => {
-        const keys = props.savedArticles.map((article) => article.keyword)
+        const keys = userArticles.map((article) => article.keyword)
         const keyTerms = new Set(keys);
         const keysArray = Array.from(keyTerms);
         setKeywords(keysArray);
@@ -66,8 +68,8 @@ const SavedNewsHeader = (props) => {
             />
             <SavedHeader>Saved Articles</SavedHeader>
             <SavedMessage>
-                {currentUser.name}, you have {props.savedArticles.length} saved <br /> article
-                {props.savedArticles.length > 1 ? 's' : ''}
+                {currentUser.name}, you have {userArticles.length} saved <br /> article
+                {userArticles.length > 1 ? 's' : ''}
                 </SavedMessage>
             <SavedKeywords>By keywords:
                 <SavedKeywordsSpan> {keysMessage}</SavedKeywordsSpan>

@@ -203,7 +203,6 @@ function App() {
           setShowNone(false); //_____remove 'no results' component
           setShowArticles(true)
           setArticles([...res.articles]);
-          console.log(res.articles.slice(0, 3));
         }
       })
       .catch(error => console.log(error))
@@ -284,7 +283,8 @@ function App() {
                   resultsNumber={resultsNumber}
                   showAllResults={showAllResults}
                   resetResults={resetResults}
-                  saveArticle={saveArticle} />}
+                  saveArticle={saveArticle}
+                  openPopupForm={openPopupForm} />}
               {showNone &&
                 <NoResults />}
               <About />

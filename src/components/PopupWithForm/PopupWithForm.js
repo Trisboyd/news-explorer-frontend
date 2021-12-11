@@ -89,26 +89,25 @@ const PopupWithForm = (props) => {
         props.closePopup();
     }
 
-    // ________________________________________________________login function
-    const handleLogin = (event) => {
+    // _______________________________________login/signup function
+    const handleSubmit = (event) => {
         event.preventDefault();
-        props.handleLogin(inputs);
-    }
-
-    // _____________________________________________________register function
-    const handleRegister = (event) => {
-        event.preventDefault();
+        if (formState === 0) {
+            props.handleLogin(inputs);
+        }
+        else 
         props.handleRegister(inputs);
     }
 
     return (
         <Overlay isOpen={props.isOpen}>
             <PopupForm
-                onSubmit={formState === 0 ? handleLogin : handleRegister}
+                onSubmit={handleSubmit}
                 ref={formRef}
                 onChange={checkFormValidity}
                 novalidate>
                 <PopupExit
+                    type='button'
                     onClick={closePopup}
                     height={'40px'}
                     width={'40px'}
@@ -165,13 +164,15 @@ const PopupWithForm = (props) => {
                     </>}
                 <FormErrorMessage>{props.emailMessage}</FormErrorMessage>
                 <MainButton
+                    type='submit'
                     color={!isValid ? '#E6E8EB' : '#2F71E5'}
                     width={'360px'}
                     mobileWidth={'90%'}
                     height={'64px'}
                     position={'relative'}
                     textColor={'#FFF'}
-                    disabled={!isValid}>
+                    disabled={!isValid}
+                >
                     {formTitle[formState]}
                 </MainButton>
                 <FormSwitch>or

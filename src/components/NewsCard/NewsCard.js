@@ -34,6 +34,7 @@ const NewsCard = (props) => {
         else {
             setBookmark(mark)
             setIsSaved(false)
+            props.openPopupForm();
         };
     }
 

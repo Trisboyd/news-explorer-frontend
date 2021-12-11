@@ -34,10 +34,11 @@ const Navigation = (props) => {
         props.signout();
     }
 
-    const handleSignInClick = () => {
+    const handleAuthClick = () => {
         if (!props.loggedIn) {
             openPopupForm();
         }
+        else signout();
     };
 
     return (
@@ -61,14 +62,12 @@ const Navigation = (props) => {
                     active={location === 'saved-news'}>
                     Saved Articles</NavLink>}
                 <NavLink
-                    onClick={handleSignInClick}
+                    onClick={handleAuthClick}
                     color={props.color}
                     to='#'>
                     {linkText()}
                     {props.loggedIn &&
-                        <NavLogout
-                            onClick={signout}
-                        />}
+                        <NavLogout />}
                 </NavLink>
             </NavWrapper>
         </ThemeProvider>
