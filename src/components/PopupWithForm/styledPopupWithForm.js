@@ -93,9 +93,6 @@ export const FormInput = styled.input`
         outline: none;
         border-bottom: 1px solid #000;
     }
-    :last-of-type {
-        margin-bottom: 39px;
-    }
 `
 export const FormLabel = styled.label`
     font-family: 'Inter', sans-serif;
@@ -103,7 +100,20 @@ export const FormLabel = styled.label`
     font-size: 12px;
     line-height: 15px;
     color: #2F71E5;
-    margin: 31px 0 9px 36px;
+    margin: 13px 0 9px 36px;
+`
+export const FormErrorMessage = styled.span`
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    margin: 3px 0 0 36px;
+
+    :last-of-type {
+        margin: 0 auto 8px;
+        text-align: center;
+    }
 `
 export const FormSwitch = styled.p`
     font-family: 'Inter', sans-serif;
@@ -119,10 +129,12 @@ export const FormSwitchSpan = styled.a`
     cursor: pointer;
     margin-left: 8px;
 `
-export const FormErrorMessage = styled.span`
-    font-family: sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    color: #FF0000;
+export const FormEmailError = styled.p`
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 15px;
+text-align: center;
+color: #FF0000;
 `

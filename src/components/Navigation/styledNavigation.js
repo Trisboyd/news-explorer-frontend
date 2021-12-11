@@ -20,7 +20,7 @@ top: 30%;
 `
 
 export const NavMenuBar = styled.div`
-background-image: ${props => props.color};
+background-image: url(${props => props.theme.hamburger});
 visibility: hidden;
 width: 16px;
 height: 2px;
@@ -45,7 +45,7 @@ margin: auto 42px auto 0;
 height: 78px;
 text-decoration: none;
 color: ${props => props.color};
-border-bottom: ${props => props.currentPage && `3px solid ${props.color}`};
+border-bottom: ${(props) => (props.active ? `3px solid ${props.theme.color}` : 'none')};
 
 :hover {
 cursor: pointer;
@@ -85,7 +85,7 @@ margin-top: auto;
 }
 `
 export const NavLogout = styled.div`
-background-image: ${props => props.image};
+background-image: url(${props => props.theme.logout});
 width: 24px;
 height: 24px;
 margin-left: 10%;

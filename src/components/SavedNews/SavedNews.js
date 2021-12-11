@@ -1,24 +1,35 @@
 import React from 'react';
 import { NewsList, NewsListWrapper } from '../NewsCardList/styledNewsCardList';
 import NewsCard from '../NewsCard/NewsCard';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const SavedNews = (props) => {
+
+    // ______________________________________________________User info imported by context
+    const currentUser = React.useContext(CurrentUserContext);
+
+    const userArticles = props.savedArticles.filter((article) => currentUser.id === article.owner);
 
     return (
         <NewsListWrapper>
             <NewsList>
-                {props.articles.map((article) => {
+                {userArticles.map((article) => {
+
+                    const { _id, keyword, title, text, date, source, link, image } = article;
+
                     return (
                         <NewsCard
-                            key={props.articles.indexOf(article)}
-                            //to be replaced with article._id
                             savedNews={props.savedNews}
-                            label={article.label}
-                            image={article.image}
-                            date={article.date}
-                            headline={article.headline}
-                            text={article.text}
-                            source={article.source} />)
+                            key={_id}
+                            keyword={keyword}
+                            image={image}
+                            date={date}
+                            headline={title}
+                            text={text}
+                            source={source}
+                            link={link}
+                            article={article}
+                            removeArticle={props.removeArticle} />)
                 })}
             </NewsList>
         </NewsListWrapper>
