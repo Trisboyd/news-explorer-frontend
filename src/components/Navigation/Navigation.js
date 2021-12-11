@@ -53,13 +53,13 @@ const Navigation = (props) => {
                 <NavLink
                     color={props.color}
                     to='/'
-                    active={location === ''}>
+                    $active={location === ''}>
                     Home
                 </NavLink>
                 {props.loggedIn && <NavLink
                     color={props.color}
                     to='/saved-news'
-                    active={location === 'saved-news'}>
+                    $active={location === 'saved-news'}>
                     Saved Articles</NavLink>}
                 <NavLink
                     onClick={handleAuthClick}

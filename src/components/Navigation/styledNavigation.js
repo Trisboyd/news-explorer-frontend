@@ -45,7 +45,7 @@ margin: auto 42px auto 0;
 height: 78px;
 text-decoration: none;
 color: ${props => props.color};
-border-bottom: ${(props) => (props.active ? `3px solid ${props.theme.color}` : 'none')};
+border-bottom: ${(props) => (props.$active ? `3px solid ${props.theme.color}` : 'none')};
 
 :hover {
 cursor: pointer;
