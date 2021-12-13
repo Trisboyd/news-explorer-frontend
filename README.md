@@ -1,5 +1,5 @@
 # News Explorer (Frontend)
-#[See the site live here](https://wonderful-yonath-9a8bb2.netlify.app)
+#                         [See the site live here](https://wonderful-yonath-9a8bb2.netlify.app)
 
 ## This repository contains the front-end code for the final project in Practicum's Web Developer Course
 
