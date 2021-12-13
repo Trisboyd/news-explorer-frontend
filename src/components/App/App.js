@@ -323,9 +323,11 @@ function App() {
           closePopup={closeAllPopups}
           openPopupForm={openPopupForm} />
         <PopupMenu
+          loggedIn={loggedIn}
           popupMenuOpen={isPopupMenuOpen}
           closePopupMenu={closeAllPopups}
-          openPopupForm={openPopupForm} />
+          openPopupForm={openPopupForm}
+          signout={signout} />
       </CurrentUserContext.Provider>
   );
 }

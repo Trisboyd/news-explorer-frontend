@@ -18,7 +18,7 @@ flex-direction: column;
 }
 
 @media ${devices.mobileL}{
-    height: 125vw;
+    height: 140vw;
 }
 
 @media ${devices.mobileM}{
