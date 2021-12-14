@@ -17,8 +17,8 @@ const PopupMessage = (props) => {
                         onClick={props.closePopup}
                         height={'40px'}
                         width={'40px'}
-                        top={'27%'}
-                        right={'18%'}
+                        top={'-27%'}
+                        right={'-10%'}
                         smallRight={'5%'}
                         smallSize={'24px'} />
                     <PopupMessageTitle>Registration successfully <br /> completed!</PopupMessageTitle>

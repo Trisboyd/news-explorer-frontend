@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { devices } from '../../utilities/constants';
 
 export const PopupMessageContainer = styled.div`
