@@ -115,7 +115,7 @@ export const NewsDate = styled.p`
     color: #B6BCBF;
     margin: 20px 0 0 0;
 `
-export const NewsHeadline = styled.h3`
+export const NewsHeadline = styled.a`
     font-family: 'Roboto Slab', sans-serif;
     font-weight: 400;
     font-size: 26px;
@@ -125,6 +125,8 @@ export const NewsHeadline = styled.h3`
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 12px 0 0 0;
+    cursor: pointer;
+    text-decoration: none;
 `
 export const NewsText = styled.p`
     font-family: 'Roboto', sans-serif;

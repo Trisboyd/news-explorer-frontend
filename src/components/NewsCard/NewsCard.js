@@ -64,7 +64,7 @@ const NewsCard = (props) => {
                 </NewsImageContainer>
                 <NewsTextWrap>
                     <NewsDate>{props.date}</NewsDate>
-                    <NewsHeadline>{props.headline}</NewsHeadline>
+                    <NewsHeadline href={props.link} target="_blank">{props.headline}</NewsHeadline>
                     <NewsText>{props.text}</NewsText>
                     <NewsSource>{props.source}</NewsSource>
                 </NewsTextWrap>
