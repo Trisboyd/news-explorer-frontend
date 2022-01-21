@@ -45,7 +45,7 @@ const NewsCardList = (props) => {
 
                     // ____________________________________convert month number to string name
                     const labelMonth = (num) => {
-                        return months[num - 1];
+                        return months[num];
                     }
 
                     return (
